@@ -86,11 +86,13 @@ function concatenateStockSymbolAndName(stock) {
 function addClickHandlersToDOM() {
   // very general click handler
   document.querySelector('.container').addEventListener('click', dataIDClickHandler);
+  document.querySelector('.container').addEventListener('touchstart', dataIDClickHandler);
   // there is a utility function to removeClickHandlersFromDOM()
 }
 
 function removeClickHandlersFromDOM() {
   document.querySelector('.container').removeEventListener('click', dataIDClickHandler);
+  document.querySelector('.container').removeEventListener('touchstart', dataIDClickHandler);
   console.log('removed ID click handler');
 }
 
