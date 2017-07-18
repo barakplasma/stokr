@@ -1,4 +1,3 @@
-<!-- todo - Break down the string creation with functions-->
 init();
 
 function init() {
