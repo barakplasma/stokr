@@ -41,11 +41,11 @@ function stockDataFetcher() {
   }
   ]`;
 
-  return mockedJSONStringifyData;
+  return JSON.parse(mockedJSONStringifyData);
 }
 
 function stockRowGenerator() {
-  const stockData = JSON.parse(stockDataFetcher());
+  const stockData = stockDataFetcher();
   return stockData.map(stock => {
     return createStockRow(stock);
   });
