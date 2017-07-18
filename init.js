@@ -10,7 +10,7 @@ function sendStockDataToDom() {
 }
 
 function processDataToHTML() {
-  const html = `<ul>${createStockList().join('')}</ul>`;
+  const html = `<ul class="stockList">${createStockList().join('')}</ul>`;
   return html;
 }
 
@@ -44,11 +44,13 @@ function createStockList() {
 
 function createStockRow(stock) {
   const row = `
-   <li>
-     <span aria-label="Stock Symbol & Stock Name">${concatenateStockSymbolAndName(stock)}</span>
-     <span aria-label="Stock LastTradePrice">${stock.LastTradePriceOnly}</span>
-     <span aria-label="Stock PercentChange">${stock.PercentChange}</span>
-     <span aria-label="Manual Arrangement Controller">&#x2B19;</span>
+   <li class="stockRow">
+     <span class="stock-data stock-name" data-id="" aria-label="Stock Symbol & Stock Name">${concatenateStockSymbolAndName(stock)}</span>
+     <span class="stock-data stock-price" data-id="" aria-label="Stock LastTradePrice">
+${stock.LastTradePriceOnly}</span>
+     <span class="stock-data stock-percentChange" data-id="" aria-label="Stock PercentChange">${stock.PercentChange}</span>
+     <span class="stock-position" data-id="" aria-label="Manual Arrangement Controller">&#x2B19;
+     </span>
    </li>
  `;
   return row;
