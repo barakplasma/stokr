@@ -14,6 +14,7 @@ header {
   /*align-items: center;*/
 }
 
+/*styles stokr*/
 .productName {
   width: 166px;
   height: 46px;
@@ -24,6 +25,7 @@ header {
   color: #41bf15;
 }
 
+/*layout related*/
 .functionBar {
   display: flex;
   flex-flow: row wrap;
@@ -57,4 +59,37 @@ header {
 .stock-position
 {
   flex: 0 1 auto;
+}
+
+/*aligns right side stock content vertically*/
+.stock-price,
+.stock-percentChange,
+.stock-position,
+.stock-position
+{
+  align-self: baseline;
+}
+
+/*font related*/
+.stock-name {
+  font-family: Avenir;
+  /*font-size: 33px;*/
+  font-weight: 300;
+  text-align: left;
+  color: #59737c;
+}
+
+.stock-price {
+  font-family: HelveticaNeueW01-55Roman;
+  /*font-size: 30px;*/
+  text-align: left;
+  color: #59737c;
+}
+
+.stock-percentChange {
+  font-family: Avenir;
+  /*font-size: 34px;*/
+  font-weight: 300;
+  text-align: center;
+  /*color: #ffffff;*/
 }

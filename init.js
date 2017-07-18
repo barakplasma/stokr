@@ -10,6 +10,7 @@ function sendStockDataToDom() {
 }
 
 function processDataToHTML() {
+  // noinspection UnnecessaryLocalVariableJS
   const html = `<ul class="stockList">${createStockList().join('')}</ul>`;
   return html;
 }
