@@ -16,7 +16,7 @@ function stockRowsToStockList() {
   return html;
 }
 
-function stockRowGenerator() {
+function stockDataFetcher() {
   const mockedJSONStringifyData = `[
   {
     "Symbol": "WIX",
@@ -40,7 +40,12 @@ function stockRowGenerator() {
     "LastTradePriceOnly": "50.599998"
   }
   ]`;
-  const stockData = JSON.parse(mockedJSONStringifyData);
+
+  return mockedJSONStringifyData;
+}
+
+function stockRowGenerator() {
+  const stockData = JSON.parse(stockDataFetcher());
   return stockData.map(stock => {
     return createStockRow(stock);
   });
