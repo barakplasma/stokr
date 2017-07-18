@@ -59,7 +59,7 @@ ${stock.LastTradePriceOnly}</span>
 }
 
 function concatenateStockSymbolAndName(stock) {
-  return `${stock.Symbol} ${stock.Name}`;
+  return `${stock.Symbol.toUpperCase()} (${stock.Name})`;
 }
 
 <!-- todo - Add event listeners to containers after the HTML was rendered (event delegation)-->
