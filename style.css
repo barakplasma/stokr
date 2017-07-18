@@ -10,6 +10,16 @@ header {
   /*align-items: center;*/
 }
 
+.productName {
+  width: 166px;
+  height: 46px;
+  font-family: LucidaGrande;
+  font-size: 39px;
+  font-weight: bold;
+  text-align: left;
+  color: #41bf15;
+}
+
 .functionBar {
   display: flex;
   flex-flow: row wrap;
