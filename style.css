@@ -1,4 +1,8 @@
 /*Add some CSS to fit the mock - https://trello.com/c/QJcQsdSv */
+body {
+  box-sizing: border-box;
+}
+
 header h1 {
   display: inline;
 }
@@ -31,3 +35,26 @@ header {
   padding: 3px;
 }
 
+.stockList {
+  list-style: none;
+  padding: 0;
+  padding-left: 29px;
+  padding-right: 16px;
+}
+
+.stockRow {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+}
+
+.stock-name {
+  flex: 1 0 auto;
+}
+
+.stock-price,
+.stock-percentChange,
+.stock-position
+{
+  flex: 0 1 auto;
+}
