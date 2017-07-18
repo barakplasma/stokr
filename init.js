@@ -41,11 +41,12 @@ function stockRowGenerator() {
   }
   ]`;
   const stockData = JSON.parse(mockedJSONStringifyData);
-  return stockData.map(stock => createStockRow(stock));
+  return stockData.map(stock => {
+    return createStockRow(stock);
+  });
 }
 
-<!-- Added `data-id` to components in the HTML so we can find it’s related data using the
- clickHandler-->
+// Added data-id to components in the HTML so we can find it’s related data using the clickHandler
 function createStockRow(stock) {
   const row = `
    <li class="stockRow">
