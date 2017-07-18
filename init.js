@@ -54,11 +54,12 @@ function stockRowGenerator() {
 // Added data-id to components in the HTML so we can find it’s related data using the clickHandler
 function createStockRow(stock) {
   const row = `
-   <li class="stockRow">
-     <span class="stock-data stock-name" data-id="stock-name" aria-label="Stock Symbol & Stock Name">${concatenateStockSymbolAndName(stock)}</span>
-     <span class="stock-data stock-price" data-id="stock-price" aria-label="Stock LastTradePrice">
+   <li class="stockRow" data-id="${stock.Symbol}">
+     <span class="stock-data stock-name" aria-label="Stock Symbol & Stock Name">${concatenateStockSymbolAndName(stock)}</span>
+     <span class="stock-data stock-price" 
+     aria-label="Stock LastTradePrice">
 ${stock.LastTradePriceOnly}</span>
-     <span class="stock-data stock-percentChange" data-id="stock-percentChange" aria-label="Stock PercentChange">${stock.PercentChange}</span>
+     <span class="stock-data stock-percentChange" aria-label="Stock PercentChange">${stock.PercentChange}</span>
      <!--temporary position controller-->
      <span class="stock-position" aria-label="Manual Arrangement Controller">&#x2B19;
      </span>
@@ -74,12 +75,17 @@ function concatenateStockSymbolAndName(stock) {
 <!-- Added event listeners to containers after the HTML was rendered (event delegation)-->
 function addClickHandlerstoDOM() {
   // very general click handler
-  document.querySelector('.container').addEventListener('click',dataIDClickHandler);
+  document.querySelector('.container').addEventListener('click', dataIDClickHandler);
 
 }
 
-<!-- todo - On events, find the `data-id` of the item and find it’s data based on that id (only when you need to update it or do something with it)-->
+<!-- On events, find the `data-id` of the item and find it’s data based on that id-->
 function dataIDClickHandler(e) {
   // console.dir(e);
-  console.dir(e.target.dataset.id);
+
+  // console.dir(e.target.parentNode.dataset.id);
+
+  console.log(stockDataFetcher().find(row => {
+    return row.Symbol === e.target.parentNode.dataset.id;
+  }));
 }
