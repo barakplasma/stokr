@@ -42,6 +42,7 @@ function createStockList() {
   return stockData.map(stock => createStockRow(stock));
 }
 
+<!-- todo - Add `data-id` to components in the HTML so we could find it’s related data later-->
 function createStockRow(stock) {
   const row = `
    <li class="stockRow">
