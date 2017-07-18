@@ -52,7 +52,8 @@ function createStockRow(stock) {
      <span class="stock-data stock-price" data-id="stock-price" aria-label="Stock LastTradePrice">
 ${stock.LastTradePriceOnly}</span>
      <span class="stock-data stock-percentChange" data-id="stock-percentChange" aria-label="Stock PercentChange">${stock.PercentChange}</span>
-     <span class="stock-position" data-id="" aria-label="Manual Arrangement Controller">&#x2B19;
+     <!--temporary position controller-->
+     <span class="stock-position" aria-label="Manual Arrangement Controller">&#x2B19;
      </span>
    </li>
  `;
