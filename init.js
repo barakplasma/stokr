@@ -5,54 +5,57 @@ function init() {
   sendStockDataToDom();
 }
 
-<!-- todo - Have one render function that initiates the HTML string creation and pushes to the document with `innerHTML`-->
+<!-- render function that initiates the HTML string creation and pushes to the document with `innerHTML`-->
 function sendStockDataToDom() {
   document.querySelector('main').innerHTML = processDataToHTML();
 }
 
 function processDataToHTML() {
-  // temporarily, do it the easy way for testing
-  const list = `
-<ul>
-  <li>
-    <span aria-label="Stock Symbol & Stock Name">AAPL (Apple.com Company)</span>
-    <span aria-label="Stock LastTradePrice">143.73</span>
-    <span aria-label="Stock PercentChange">-2.62%</span>
-    <span aria-label="Manual Arrangement Controller">⬙</span>
-  </li>
-  <li>
-    <span aria-label="Stock Symbol & Stock Name">GOOG (Google.com Inc)</span>
-    <span aria-label="Stock LastTradePrice">927.33</span>
-    <span aria-label="Stock PercentChange">-5.62%</span>
-    <span aria-label="Manual Arrangement Controller">⬙</span>
-  </li>
-  <li>
-    <span aria-label="Stock Symbol & Stock Name">WIX (Wix.com span)</span>
-    <span aria-label="Stock LastTradePrice">76.10</span>
-    <span aria-label="Stock PercentChange">+0.33%</span>
-    <span aria-label="Manual Arrangement Controller">⬙</span>
-  </li>
-  <li>
-    <span aria-label="Stock Symbol & Stock Name">MSFT (Microsoft.com Corporation)</span>
-    <span aria-label="Stock LastTradePrice">41.51</span>
-    <span aria-label="Stock PercentChange">-17.76%</span>
-    <span aria-label="Manual Arrangement Controller">⬙</span>
-  </li>
-  <li>
-    <span aria-label="Stock Symbol & Stock Name">BMW (BMW Cars Corporation)</span>
-    <span aria-label="Stock LastTradePrice">300.2</span>
-    <span aria-label="Stock PercentChange">-1.76%</span>
-    <span aria-label="Manual Arrangement Controller">⬙</span>
-  </li>
-  <li>
-    <span aria-label="Stock Symbol & Stock Name">GPO (GoPro.com span)</span>
-    <span aria-label="Stock LastTradePrice">11.09</span>
-    <span aria-label="Stock PercentChange">30.38%</span>
-    <span aria-label="Manual Arrangement Controller">⬙</span>
-  </li>
-</ul>
-`;
-  return list;
+  return createStockList().join('');
+}
+
+function createStockList() {
+  const mockedJSONStringifyData = `[
+  {
+    "Symbol": "WIX",
+    "Name": "Wix.com Ltd.",
+    "Change": "0.750000",
+    "PercentChange": "+1.51%",
+    "LastTradePriceOnly": "76.099998"
+  },
+  {
+    "Symbol": "MSFT",
+    "Name": "Microsoft Corporation",
+    "PercentChange": "-2.09%",
+    "Change": "-0.850006",
+    "LastTradePriceOnly": "69.620003"
+  },
+  {
+    "Symbol": "YHOO",
+    "Name": "Yahoo! Inc.",
+    "Change": "0.279999",
+    "PercentChange": "+1.11%",
+    "LastTradePriceOnly": "50.599998"
+  }
+  ]`;
+  const stockData = JSON.parse(mockedJSONStringifyData);
+  return stockData.map(stock => createStockRow(stock));
+}
+
+function createStockRow(stock) {
+  const row = `
+   <li>
+     <span aria-label="Stock Symbol & Stock Name">${concatenateStockSymbolAndName(stock)}</span>
+     <span aria-label="Stock LastTradePrice">${stock.LastTradePriceOnly}</span>
+     <span aria-label="Stock PercentChange">${stock.PercentChange}</span>
+     <span aria-label="Manual Arrangement Controller">&#x2B19;</span>
+   </li>
+ `;
+  return row;
+}
+
+function concatenateStockSymbolAndName(stock) {
+  return `${stock.Symbol} ${stock.Name}`;
 }
 
 <!-- todo - Add event listeners to containers after the HTML was rendered (event delegation)-->
