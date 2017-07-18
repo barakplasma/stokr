@@ -59,11 +59,15 @@ function createStockRow(stock) {
   // noinspection UnnecessaryLocalVariableJS
   const row = `
    <li class="stockRow" data-id="${stock.Symbol}">
-     <span class="stock-data stock-name" aria-label="Stock Symbol & Stock Name">${concatenateStockSymbolAndName(stock)}</span>
-     <span class="stock-data stock-price" 
-     aria-label="Stock LastTradePrice">
-${stock.LastTradePriceOnly}</span>
-     <span class="stock-data stock-percentChange" aria-label="Stock PercentChange">${stock.PercentChange}</span>
+     <span class="stock-data stock-name" aria-label="Stock Symbol & Stock Name">
+      ${concatenateStockSymbolAndName(stock)}
+     </span>
+     <span class="stock-data stock-price" aria-label="Stock LastTradePrice">
+      ${stock.LastTradePriceOnly}
+     </span>
+     <span class="stock-data stock-percentChange" aria-label="Stock PercentChange">
+      ${stock.PercentChange}
+     </span>
      <!--temporary position controller-->
      <span class="stock-position" aria-label="Manual Arrangement Controller">&#x2B19;
      </span>
@@ -99,7 +103,7 @@ function dataIDClickHandler(e) {
   //   return row.Symbol === e.target.parentNode.dataset.id;
   // }));
 
-  if(e.target.classList.contains('stock-percentChange')){
+  if (e.target.classList.contains('stock-percentChange')) {
     console.log('perCha');
     reRender();
   }
