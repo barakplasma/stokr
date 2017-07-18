@@ -11,7 +11,8 @@ function sendStockDataToDom() {
 }
 
 function processDataToHTML() {
-  return createStockList().join('');
+  const html = `<ul>${createStockList().join('')}</ul>`;
+  return html;
 }
 
 function createStockList() {
