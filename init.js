@@ -1,9 +1,11 @@
-init();
-
 function init() {
   displayStockData();
   addClickHandlersToDOM();
 }
+
+const stockSettings = {
+  "changePercentToggle": false
+};
 
 // render function that initiates the HTML string creation and pushes to the document with innerHTML
 function displayStockData() {
@@ -66,9 +68,8 @@ function createStockRow(stock) {
       ${stock.LastTradePriceOnly}
      </span>
      <span class="stock-data stock-percentChange" aria-label="Stock PercentChange">
-      ${stock.PercentChange}
+      ${stockSettings.changePercentToggle?stock.MarketCapitalization:stock.PercentChange}
      </span>
-     <!--temporary position controller-->
      <span class="stock-position" aria-label="Manual Arrangement Controller">&#x2B19;
      </span>
    </li>
@@ -104,7 +105,8 @@ function dataIDClickHandler(e) {
   // }));
 
   if (e.target.classList.contains('stock-percentChange')) {
-    console.log('perCha');
+    // console.log('perCha');
+    stockSettings.changePercentToggle = stockSettings.changePercentToggle?false:true;
     reRender();
   }
 }
@@ -115,3 +117,5 @@ function reRender() {
   init();
   console.timeEnd('reRender');
 }
+
+init();
