@@ -5,7 +5,14 @@ function init() {
   sendStockDataToDom();
 }
 
-const list = `
+<!-- todo - Have one render function that initiates the HTML string creation and pushes to the document with `innerHTML`-->
+function sendStockDataToDom() {
+  document.querySelector('main').innerHTML = processDataToHTML();
+}
+
+function processDataToHTML() {
+  // temporarily, do it the easy way for testing
+  const list = `
 <ul>
   <li>
     <span aria-label="Stock Symbol & Stock Name">AAPL (Apple.com Company)</span>
@@ -43,24 +50,10 @@ const list = `
     <span aria-label="Stock PercentChange">30.38%</span>
     <span aria-label="Manual Arrangement Controller">⬙</span>
   </li>
-</ul>`;
-
-<!-- todo - Break down the string creation with functions-->
-init();
-
-function init() {
-  sendStockDataToDom();
-}
-
-function sendStockDataToDom() {
-  document.querySelector('main').innerHTML = processDataToHTML();
-}
-
-function processDataToHTML() {
-  // temporarily, do it the easy way for testing
+</ul>
+`;
   return list;
 }
 
-<!-- todo - Have one render function that initiates the HTML string creation and pushes to the document with `innerHTML`-->
 <!-- todo - Add event listeners to containers after the HTML was rendered (event delegation)-->
 <!-- todo - On events, find the `data-id` of the item and find it’s data based on that id (only when you need to update it or do something with it)-->
