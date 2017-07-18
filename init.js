@@ -1,52 +1,9 @@
-const table = `<table>
-  <thead>
-  <tr>
-    <th aria-label="Stock Symbol & Stock Name"></th>
-    <th aria-label="Stock LastTradePrice"></th>
-    <th aria-label="Stock PercentChange"></th>
-    <th aria-label="Manual Arrangement controller"></th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr>
-    <td>AAPL (Apple.com Company)</td>
-    <td>143.73</td>
-    <td>-2.62%</td>
-    <td>⬙</td>
-  </tr>
-  <tr>
-    <td>GOOG (Google.com Inc)</td>
-    <td>927.33</td>
-    <td>-2.62%</td>
-    <td>⬙</td>
-  </tr>
-  <tr>
-    <td>WIX (Wix.com Ltd)</td>
-    <td>76.10</td>
-    <td>+0.33%</td>
-    <td>⬙</td>
-  </tr>
-  <tr>
-    <td>MSFT (Microsoft.com Coporation)</td>
-    <td>41.51</td>
-    <td>-17.76%</td>
-    <td>⬙</td>
-  </tr>
-  <tr>
-    <td>BMW (BMW Cars Coporation)</td>
-    <td>300.2</td>
-    <td>-1.76%</td>
-    <td>⬙</td>
-  </tr>
-  <tr>
-    <td>GPO (GoPro.com LTD)</td>
-    <td>11.09</td>
-    <td>30.38%</td>
-    <td>⬙</td>
-  </tr>
-  </tbody>
-</table>
-`;
+<!-- todo - Break down the string creation with functions-->
+init();
+
+function init() {
+  sendStockDataToDom();
+}
 
 const list = `
 <ul>
