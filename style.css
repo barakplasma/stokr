@@ -1,1 +1,23 @@
 /*Add some CSS to fit the mock - https://trello.com/c/QJcQsdSv */
+header h1 {
+  display: inline;
+}
+
+header {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  /*align-items: center;*/
+}
+
+.functionBar {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.functionBar span {
+  padding: 3px;
+}
+
