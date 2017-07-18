@@ -44,7 +44,8 @@ function stockRowGenerator() {
   return stockData.map(stock => createStockRow(stock));
 }
 
-<!-- todo - Add `data-id` to components in the HTML so we could find it’s related data later-->
+<!-- Added `data-id` to components in the HTML so we can find it’s related data using the
+ clickHandler-->
 function createStockRow(stock) {
   const row = `
    <li class="stockRow">
@@ -64,7 +65,7 @@ function concatenateStockSymbolAndName(stock) {
   return `${stock.Symbol.toUpperCase()} (${stock.Name})`;
 }
 
-
 <!-- todo - Add event listeners to containers after the HTML was rendered (event delegation)-->
+
 
 <!-- todo - On events, find the `data-id` of the item and find it’s data based on that id (only when you need to update it or do something with it)-->
