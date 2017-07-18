@@ -69,8 +69,12 @@ function concatenateStockSymbolAndName(stock) {
 <!-- Added event listeners to containers after the HTML was rendered (event delegation)-->
 function addClickHandlerstoDOM() {
   // very general click handler
-  document.querySelector('.container').addEventListener('click',console.log);
+  document.querySelector('.container').addEventListener('click',dataIDClickHandler);
 
 }
 
 <!-- todo - On events, find the `data-id` of the item and find it’s data based on that id (only when you need to update it or do something with it)-->
+function dataIDClickHandler(e) {
+  // console.dir(e);
+  console.dir(e.target.dataset.id);
+}
