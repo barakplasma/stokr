@@ -1,21 +1,22 @@
 init();
 
 function init() {
-  sendStockDataToDom();
+  displayStockData();
+  addClickHandlerstoDOM();
 }
 
 <!-- render function that initiates the HTML string creation and pushes to the document with `innerHTML`-->
-function sendStockDataToDom() {
-  document.querySelector('main').innerHTML = processDataToHTML();
+function displayStockData() {
+  document.querySelector('main').innerHTML = stockRowsToStockList();
 }
 
-function processDataToHTML() {
+function stockRowsToStockList() {
   // noinspection UnnecessaryLocalVariableJS
-  const html = `<ul class="stockList">${createStockList().join('')}</ul>`;
+  const html = `<ul class="stockList">${stockRowGenerator().join('')}</ul>`;
   return html;
 }
 
-function createStockList() {
+function stockRowGenerator() {
   const mockedJSONStringifyData = `[
   {
     "Symbol": "WIX",
@@ -47,10 +48,10 @@ function createStockList() {
 function createStockRow(stock) {
   const row = `
    <li class="stockRow">
-     <span class="stock-data stock-name" data-id="" aria-label="Stock Symbol & Stock Name">${concatenateStockSymbolAndName(stock)}</span>
-     <span class="stock-data stock-price" data-id="" aria-label="Stock LastTradePrice">
+     <span class="stock-data stock-name" data-id="stock-name" aria-label="Stock Symbol & Stock Name">${concatenateStockSymbolAndName(stock)}</span>
+     <span class="stock-data stock-price" data-id="stock-price" aria-label="Stock LastTradePrice">
 ${stock.LastTradePriceOnly}</span>
-     <span class="stock-data stock-percentChange" data-id="" aria-label="Stock PercentChange">${stock.PercentChange}</span>
+     <span class="stock-data stock-percentChange" data-id="stock-percentChange" aria-label="Stock PercentChange">${stock.PercentChange}</span>
      <span class="stock-position" data-id="" aria-label="Manual Arrangement Controller">&#x2B19;
      </span>
    </li>
@@ -62,5 +63,7 @@ function concatenateStockSymbolAndName(stock) {
   return `${stock.Symbol.toUpperCase()} (${stock.Name})`;
 }
 
+
 <!-- todo - Add event listeners to containers after the HTML was rendered (event delegation)-->
+
 <!-- todo - On events, find the `data-id` of the item and find it’s data based on that id (only when you need to update it or do something with it)-->
