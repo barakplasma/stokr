@@ -66,9 +66,11 @@ function concatenateStockSymbolAndName(stock) {
   return `${stock.Symbol.toUpperCase()} (${stock.Name})`;
 }
 
-<!-- todo - Add event listeners to containers after the HTML was rendered (event delegation)-->
+<!-- Added event listeners to containers after the HTML was rendered (event delegation)-->
 function addClickHandlerstoDOM() {
-  document.body.addEventListener('click',console.log);
+  // very general click handler
+  document.querySelector('.container').addEventListener('click',console.log);
+
 }
 
 <!-- todo - On events, find the `data-id` of the item and find it’s data based on that id (only when you need to update it or do something with it)-->
