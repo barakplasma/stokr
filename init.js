@@ -2,10 +2,10 @@ init();
 
 function init() {
   displayStockData();
-  addClickHandlerstoDOM();
+  addClickHandlersToDOM();
 }
 
-<!-- render function that initiates the HTML string creation and pushes to the document with `innerHTML`-->
+// render function that initiates the HTML string creation and pushes to the document with innerHTML
 function displayStockData() {
   document.querySelector('main').innerHTML = stockRowsToStockList();
 }
@@ -56,6 +56,7 @@ function stockRowGenerator() {
 
 // Added data-id to components in the HTML so we can find it’s related data using the clickHandler
 function createStockRow(stock) {
+  // noinspection UnnecessaryLocalVariableJS
   const row = `
    <li class="stockRow" data-id="${stock.Symbol}">
      <span class="stock-data stock-name" aria-label="Stock Symbol & Stock Name">${concatenateStockSymbolAndName(stock)}</span>
@@ -75,7 +76,8 @@ function concatenateStockSymbolAndName(stock) {
   return `${stock.Symbol.toUpperCase()} (${stock.Name})`;
 }
 
-<!-- Added event listeners to containers after the HTML was rendered (event delegation)-->
+// Added event listeners to containers after the HTML was rendered (event delegation)
+// noinspection JSUnusedGlobalSymbols
 function addClickHandlersToDOM() {
   // very general click handler
   document.querySelector('.container').addEventListener('click', dataIDClickHandler);
@@ -84,15 +86,28 @@ function addClickHandlersToDOM() {
 
 function removeClickHandlersFromDOM() {
   document.querySelector('.container').removeEventListener('click', dataIDClickHandler);
+  console.log('removed ID click handler');
 }
 
-<!-- On events, find the `data-id` of the item and find it’s data based on that id-->
+// On events, find the `data-id` of the item and find it’s data based on that id
 function dataIDClickHandler(e) {
   // console.dir(e);
 
   // console.dir(e.target.parentNode.dataset.id);
 
-  console.log(stockDataFetcher().find(row => {
-    return row.Symbol === e.target.parentNode.dataset.id;
-  }));
+  // console.log(stockDataFetcher().find(row => {
+  //   return row.Symbol === e.target.parentNode.dataset.id;
+  // }));
+
+  if(e.target.classList.contains('stock-percentChange')){
+    console.log('perCha');
+    reRender();
+  }
+}
+
+function reRender() {
+  console.time('reRender');
+  removeClickHandlersFromDOM();
+  init();
+  console.timeEnd('reRender');
 }
