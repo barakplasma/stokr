@@ -77,7 +77,7 @@ function createStockRow(stock) {
       <polygon fill="#8F8F8F" id="UpTriangle" transform="translate(16.500000, 11.000000) scale(-1, 1) translate(-16.500000, -11.000000)" points="16.1891892 3 28 19 5 19">
       </polygon>
      </svg>
-     <svg style="position: relative; top: .3em; left: -1.2em;" width="33px" height="25px" 
+     <svg style="position: relative; top: .3em; left: -1.26em;" width="33px" height="25px" 
      viewBox="0 0 33 25" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
       <polygon fill="#8F8F8F" id="DownTriangle" transform="translate(16.500000, 11.000000) scale(1, -1) translate(-16.500000, -11.000000) " points="16.1891892 3 28 19 5 19">
       </polygon>
