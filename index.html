@@ -8,47 +8,76 @@
 </head>
 <body>
 <div class="container">
-<header>
-  <h1 aria-label="Product Name" class="productName">STOKR</h1>
-  <span class="functionBar">
-    <span>Search</span><span>Reload</span><span>Filter</span><span>Settings</span>
+  <header>
+    <h1 aria-label="Product Name"
+        class="productName">STOKR</h1>
+    <span class="functionBar">
+    <img src="/assets/svg/search.svg"
+         alt="Search" />
+    <img src="/assets/svg/refresh.svg"
+         alt="Refresh" />
+    <img src="/assets/svg/filter.svg"
+         alt="Filter" />
+    <img src="/assets/svg/settings.svg"
+         alt="Settings" />
   </span>
-</header>
+  </header>
 
-<!--data to display before javascript render-->
-<main>
-  <ul class="stockList">
-    <li class="stockRow">
-      <span class="stock-data stock-name" data-id="stock-name" aria-label="Stock Symbol &amp; Stock Name">WIX (Wix.com Ltd.)</span>
-      <span class="stock-data stock-price" data-id="stock-price" aria-label="Stock LastTradePrice">
+  <!--data to display before javascript render-->
+  <main>
+    <ul class="stockList">
+      <li class="stockRow">
+        <span class="stock-data stock-name"
+              data-id="stock-name"
+              aria-label="Stock Symbol &amp; Stock Name">WIX (Wix.com Ltd.)</span>
+        <span class="stock-data stock-price"
+              data-id="stock-price"
+              aria-label="Stock LastTradePrice">
 76</span>
-      <span class="stock-data stock-percentChange" data-id="stock-percentChange" aria-label="Stock PercentChange">+1.51%</span>
-      <!--temporary position controller-->
-      <span class="stock-position" aria-label="Manual Arrangement Controller">⬙
+        <span class="stock-data stock-percentChange"
+              data-id="stock-percentChange"
+              aria-label="Stock PercentChange">+1.51%</span>
+        <!--temporary position controller-->
+        <span class="stock-position"
+              aria-label="Manual Arrangement Controller">⬙
      </span>
-    </li>
+      </li>
 
-    <li class="stockRow">
-      <span class="stock-data stock-name" data-id="stock-name" aria-label="Stock Symbol &amp; Stock Name">MSFT (Microsoft Corporation)</span>
-      <span class="stock-data stock-price" data-id="stock-price" aria-label="Stock LastTradePrice">
+      <li class="stockRow">
+        <span class="stock-data stock-name"
+              data-id="stock-name"
+              aria-label="Stock Symbol &amp; Stock Name">MSFT (Microsoft Corporation)</span>
+        <span class="stock-data stock-price"
+              data-id="stock-price"
+              aria-label="Stock LastTradePrice">
 69</span>
-      <span class="stock-data stock-percentChange" data-id="stock-percentChange" aria-label="Stock PercentChange">-2.09%</span>
-      <!--temporary position controller-->
-      <span class="stock-position" aria-label="Manual Arrangement Controller">⬙
+        <span class="stock-data stock-percentChange"
+              data-id="stock-percentChange"
+              aria-label="Stock PercentChange">-2.09%</span>
+        <!--temporary position controller-->
+        <span class="stock-position"
+              aria-label="Manual Arrangement Controller">⬙
      </span>
-    </li>
+      </li>
 
-    <li class="stockRow">
-      <span class="stock-data stock-name" data-id="stock-name" aria-label="Stock Symbol &amp; Stock Name">YHOO (Yahoo! Inc.)</span>
-      <span class="stock-data stock-price" data-id="stock-price" aria-label="Stock LastTradePrice">
+      <li class="stockRow">
+        <span class="stock-data stock-name"
+              data-id="stock-name"
+              aria-label="Stock Symbol &amp; Stock Name">YHOO (Yahoo! Inc.)</span>
+        <span class="stock-data stock-price"
+              data-id="stock-price"
+              aria-label="Stock LastTradePrice">
 50</span>
-      <span class="stock-data stock-percentChange" data-id="stock-percentChange" aria-label="Stock PercentChange">+1.11%</span>
-      <!--temporary position controller-->
-      <span class="stock-position" aria-label="Manual Arrangement Controller">⬙
+        <span class="stock-data stock-percentChange"
+              data-id="stock-percentChange"
+              aria-label="Stock PercentChange">+1.11%</span>
+        <!--temporary position controller-->
+        <span class="stock-position"
+              aria-label="Manual Arrangement Controller">⬙
      </span>
-    </li>
-  </ul>
-</main>
+      </li>
+    </ul>
+  </main>
 </div>
 <script src="init.js"></script>
 </body>
