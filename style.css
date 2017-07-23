@@ -78,19 +78,28 @@ span {
 }
 
 .stock-price,
-.stock-percentChange,
-.stock-position
+.stock-percentChange
+
 {
   flex: 0 1 auto;
 }
 
 /*aligns right side stock content vertically*/
 .stock-price,
-.stock-percentChange,
-.stock-position,
-.stock-position
+.stock-percentChange
 {
   align-self: baseline;
+}
+
+/*aligns up and down arrows*/
+.stock-position {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content:center;
+}
+
+.arrows {
+  height: 1rem;
 }
 
 /*font related*/
