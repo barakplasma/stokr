@@ -36,9 +36,14 @@ window.Stokr.Controller = (function () {
 
     // console.dir(e.target.dataset);
     if (e.target.dataset.id ==='upArrow') {
-      console.dir(e.target.parentNode.parentNode.parentNode.dataset.id) //ex 'WIX'
+      // console.dir(e.target.parentNode.parentNode.parentNode.dataset.id) //ex 'WIX'
       const stockToMove = e.target.parentNode.parentNode.parentNode.dataset.id;
       Model.reOrderStocks(stockToMove,-1);
+      reRender();
+    }
+    if (e.target.dataset.id ==='downArrow'){
+      const stockToMove = e.target.parentNode.parentNode.parentNode.dataset.id;
+      Model.reOrderStocks(stockToMove,1);
       reRender();
     }
   }

@@ -48,15 +48,24 @@ window.Stokr.Model = (function () {
     },
 
     reOrderStocks: function (stockToMove, upOrDownCount) {
-      //todo next step, allow a variable upOrDownCount to move x spaces
+      //todo reach step, allow a variable upOrDownCount to move x spaces
       const indexToMove = currentStocks.findIndex(stock => {
         return stock.Symbol === stockToMove;
       });
       // console.log(indexToMove);
-      const leftover = currentStocks.splice(indexToMove - 1, 1);
-      // console.log(leftover);
-      currentStocks.splice(indexToMove, 0, leftover[0]);
-      // console.log(currentStocks);
+      // move up
+
+      if(upOrDownCount === -1 && indexToMove !== 0) {
+        const leftover = currentStocks.splice(indexToMove - 1, 1);
+        // console.log(leftover);
+        currentStocks.splice(indexToMove, 0, leftover[0]);
+        // console.log(currentStocks);
+      }
+      // move down
+      if(upOrDownCount === 1 && indexToMove !== currentStocks.length) {
+        const leftover = currentStocks.splice(indexToMove, 1);
+        currentStocks.splice(indexToMove+1, 0, leftover[0]);
+      }
       return currentStocks;
     },
 
