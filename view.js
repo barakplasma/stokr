@@ -1,30 +1,21 @@
 window.Stokr.View = (function () {
-  return {
+  function stockRowsToStockList (stockData) {
+    // noinspection UnnecessaryLocalVariableJS
+    const html = `<ul class="stockList">${stockRowGenerator(stockData).join('')}</ul>`;
+    return html;
+  }
 
-    Controller: window.Stokr.Controller,
-
-// render function that initiates the HTML string creation and pushes to the document with innerHTML
-    displayStockData: function (stockData) {
-      document.querySelector('main').innerHTML = this.stockRowsToStockList(stockData);
-    },
-
-    stockRowsToStockList: function (stockData) {
-      // noinspection UnnecessaryLocalVariableJS
-      const html = `<ul class="stockList">${this.stockRowGenerator(stockData).join('')}</ul>`;
-      return html;
-    },
-
-    stockRowGenerator: function (stockData) {
-      // const stockData = stockDataFetcher();
-      return stockData.map(stock => {
-        return this.createStockRow(stock);
-      });
-    },
+  function stockRowGenerator  (stockData) {
+    // const stockData = stockDataFetcher();
+    return stockData.map(stock => {
+      return createStockRow(stock);
+    });
+  }
 
 // Added data-id to components in the HTML so we can find it’s related data using the clickHandler
-    createStockRow: function (stock) {
-      // noinspection UnnecessaryLocalVariableJS
-      const row = `
+  function createStockRow (stock) {
+    // noinspection UnnecessaryLocalVariableJS
+    const row = `
    <li class="stockRow" data-id="${stock.Symbol}">
      <span class="stock-data stock-name" aria-label="Stock Symbol & Stock Name">
       ${window.Stokr.Controller.concatenateStockSymbolAndName(stock)}
@@ -50,7 +41,14 @@ window.Stokr.View = (function () {
      </div>
    </li>
  `;
-      return row;
+    return row;
+  }
+
+  return {
+
+// render function that initiates the HTML string creation and pushes to the document with innerHTML
+    displayStockData: function (stockData) {
+      document.querySelector('main').innerHTML = stockRowsToStockList(stockData);
     }
   }
 })();
