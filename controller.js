@@ -62,6 +62,10 @@ window.Stokr.Controller = (function () {
       return this.Model.stockSettings.changePercentToggle ? 'MarketCapitalization' :
         'PercentChange';
     },
+
+    stockGainOrLoss: function (stock) {
+      return parseFloat(stock.PercentChange)>0?'growing':'shrinking';
+    },
   }
 })();
 

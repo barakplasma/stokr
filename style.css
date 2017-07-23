@@ -132,6 +132,7 @@ span {
   display: inline-block;
   border-radius: .75rem;
   padding: .5rem .5rem .5rem 2rem;
+  width: 8rem;
 }
 
 .stock-Change[data-change="growing"]{
