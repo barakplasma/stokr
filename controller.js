@@ -19,7 +19,7 @@ window.Stokr.Controller = (function () {
 
 // On events, find the `data-id` of the item and find it’s data based on that id
   function dataIDClickHandler(e) {
-    //console.dir(e);
+    // console.dir(e);
 
     // console.dir(e.target.parentNode.dataset.id);
 
@@ -33,6 +33,14 @@ window.Stokr.Controller = (function () {
       window.Stokr.Model.stockSettings.changePercentToggle = window.Stokr.Model.stockSettings.changePercentToggle ? false : true;
       reRender();
     }
+
+    // console.dir(e.target.dataset);
+    if (e.target.dataset.id ==='upArrow') {
+      console.dir(e.target.parentNode.parentNode.parentNode.dataset.id) //ex 'WIX'
+      const stockToMove = e.target.parentNode.parentNode.parentNode.dataset.id;
+      Model.reOrderStocks(stockToMove,-1);
+      reRender();
+    }
   }
 
   function reRender() {
@@ -44,9 +52,9 @@ window.Stokr.Controller = (function () {
 
   return {
     init: function () {
-    window.Stokr.View.displayStockData(window.Stokr.Model.stockDataFetcher());
-    addClickHandlersToDOM();
-  },
+      window.Stokr.View.displayStockData(window.Stokr.Model.stockDataFetcher());
+      addClickHandlersToDOM();
+    },
 
     concatenateStockSymbolAndName: function (stock) {
       return `${stock.Symbol.toUpperCase()} (${stock.Name})`;
