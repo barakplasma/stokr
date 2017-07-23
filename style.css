@@ -78,7 +78,7 @@ span {
 }
 
 .stock-price,
-.stock-percentChange
+.stock-Change
 
 {
   flex: 0 1 auto;
@@ -86,7 +86,8 @@ span {
 
 /*aligns right side stock content vertically*/
 .stock-price,
-.stock-percentChange
+.stock-Change,
+.stock-name
 {
   align-self: baseline;
 }
@@ -118,10 +119,24 @@ span {
   color: #59737c;
 }
 
-.stock-percentChange {
+.stock-Change {
   font-family: Avenir, sans-serif;
   font-size: 34px;
   font-weight: 300;
   text-align: center;
   /*color: #ffffff;*/
+}
+
+/*change color*/
+.stock-Change{
+  display: inline-block;
+  border-radius: .75rem;
+  padding: .5rem .5rem .5rem 2rem;
+}
+
+.stock-Change[data-change="growing"]{
+  background-color: #63da39;
+}
+.stock-Change[data-change="shrinking"]{
+  background-color: #ff4f46;
 }

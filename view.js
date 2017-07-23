@@ -32,7 +32,7 @@ window.Stokr.View = (function () {
      <span class="stock-data stock-price" aria-label="Stock LastTradePrice">
       ${stock.LastTradePriceOnly}
      </span>
-     <span class="stock-data stock-percentChange" aria-label="Stock PercentChange">
+     <span class="stock-data stock-Change" data-change="growing" aria-label="Stock PercentChange">
       ${stock[window.Stokr.Controller.getStockSettings()]}
      </span>
      <div class="stock-position" aria-label="Row Up and Down Arrows">
