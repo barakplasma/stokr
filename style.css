@@ -88,6 +88,10 @@ span {
   flex: 0 1 auto;
 }
 
+.stock-price {
+  margin-right: 1.5rem;
+}
+
 /*aligns right side stock content vertically*/
 .stock-price,
 .stock-Change,
@@ -131,7 +135,7 @@ span {
   /*color: #ffffff;*/
 }
 
-/*change color*/
+/*change color based on growing or shrinking value*/
 .stock-Change{
   display: inline-block;
   border-radius: .75rem;
