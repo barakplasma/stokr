@@ -21,7 +21,7 @@ window.Stokr.View = (function () {
       ${window.Stokr.Controller.concatenateStockSymbolAndName(stock)}
      </span>
      <span class="stock-data stock-price" aria-label="Stock LastTradePrice">
-      ${stock.LastTradePriceOnly}
+      ${window.Stokr.Controller.roundPrice(stock.LastTradePriceOnly)}
      </span>
      <span class="stock-data stock-Change" data-change="${window.Stokr.Controller.stockGainOrLoss(stock)}" aria-label="Stock PercentChange">
       ${stock[window.Stokr.Controller.getStockSettings()]}
