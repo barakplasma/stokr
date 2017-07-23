@@ -22,7 +22,7 @@ body {
 
 span {
   font-family: Avenir, sans-serif;
-  font-size: 33px;
+  font-size: 2rem;
 }
 
 .container {
@@ -38,7 +38,7 @@ span {
   width: 166px;
   height: 46px;
   font-family: "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Geneva, Verdana, sans-serif;
-  font-size: 39px;
+  font-size: 2.5rem;
   font-weight: bold;
   text-align: left;
   color: #41bf15;
@@ -53,8 +53,12 @@ span {
   align-items: center;
 }
 
+/*functionBar icons*/
 .functionBar span {
   padding: 3px;
+}
+.functionBar img {
+  margin: .8rem;
 }
 
 .stockList {
@@ -100,13 +104,13 @@ span {
 }
 
 .arrows {
-  height: 1rem;
+  height: 2rem;
 }
 
 /*font related*/
 .stock-name {
   font-family: Avenir, sans-serif;
-  font-size: 33px;
+  font-size: 2rem;
   font-weight: 300;
   text-align: left;
   color: #59737c;
@@ -114,14 +118,14 @@ span {
 
 .stock-price {
   font-family: HelveticaNeueW01-55Roman, "Helvetica Neue", Helvetica, Arial, sans-serif;;
-  font-size: 30px;
+  font-size: 2rem;
   text-align: left;
   color: #59737c;
 }
 
 .stock-Change {
   font-family: Avenir, sans-serif;
-  font-size: 34px;
+  font-size: 2rem;
   font-weight: 300;
   text-align: center;
   /*color: #ffffff;*/
