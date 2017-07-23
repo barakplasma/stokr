@@ -31,7 +31,7 @@ window.Stokr.View = (function () {
       ${stock.LastTradePriceOnly}
      </span>
      <span class="stock-data stock-percentChange" aria-label="Stock PercentChange">
-      ${window.Stokr.Model.stockSettings.changePercentToggle ? stock.MarketCapitalization : stock.PercentChange}
+      ${stock[window.Stokr.Controller.getStockSettings()]}
      </span>
      <div class="stock-position" aria-label="Row Up and Down Arrows">
      <svg class="arrows" viewBox="0 0 33 25" 

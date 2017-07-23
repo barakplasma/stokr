@@ -58,6 +58,10 @@ window.Stokr.Controller = (function () {
       console.timeEnd('reRender');
     },
 
+    getStockSettings: function () {
+      return window.Stokr.Model.stockSettings.changePercentToggle ? 'MarketCapitalization' :
+        'PercentChange';
+    },
   }
 })();
 
