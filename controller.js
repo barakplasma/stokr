@@ -6,11 +6,11 @@ window.Stokr.Controller = (function () {
     // const View  = window.Stokr.View ;
     // const Model = window.Stokr.Model ;
 
-    // const [View] = window.Stokr.View;
-    // const [Model] = window.Stokr.Model;
+    View : window.Stokr.View,
+    Model: window.Stokr.Model,
 
     init: function () {
-      window.Stokr.View.displayStockData(window.Stokr.Model.stockDataFetcher());
+      this.View.displayStockData(this.Model.stockDataFetcher());
       this.addClickHandlersToDOM();
     },
 
@@ -59,7 +59,7 @@ window.Stokr.Controller = (function () {
     },
 
     getStockSettings: function () {
-      return window.Stokr.Model.stockSettings.changePercentToggle ? 'MarketCapitalization' :
+      return this.Model.stockSettings.changePercentToggle ? 'MarketCapitalization' :
         'PercentChange';
     },
   }

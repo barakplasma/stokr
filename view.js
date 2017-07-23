@@ -1,6 +1,8 @@
 window.Stokr.View = (function () {
   return {
 
+    Controller: window.Stokr.Controller,
+
 // render function that initiates the HTML string creation and pushes to the document with innerHTML
     displayStockData: function (stockData) {
       document.querySelector('main').innerHTML = this.stockRowsToStockList(stockData);
