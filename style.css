@@ -152,6 +152,7 @@ span {
 
 /*filterPanel styling*/
 .filterPanel {
+  padding: 0 16px 0 20px;
   display: flex;
   flex-flow: column wrap;
   height: 10vw;
