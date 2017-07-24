@@ -64,7 +64,7 @@ window.Stokr.View = (function () {
   function dataIDClickHandler(e) {
     // console.dir(e);
 
-    console.dir(e.target);
+    // console.dir(e.target);
 
     // console.dir(e.target.parentNode.dataset.id);
 
@@ -76,7 +76,7 @@ window.Stokr.View = (function () {
       // console.log('perCha');
 
       window.Stokr.Model.stockSettings.changePercentToggle = window.Stokr.Model.stockSettings.changePercentToggle ? false : true;
-      reRender();
+      window.Stokr.Controller.init();
     }
 
     // console.dir(e.target.dataset);
@@ -84,12 +84,12 @@ window.Stokr.View = (function () {
       // console.dir(e.target.parentNode.parentNode.parentNode.dataset.id) //ex 'WIX'
       const stockToMove = e.target.parentNode.parentNode.parentNode.dataset.id;
       window.Stokr.Controller.reOrderStocks(stockToMove, -1);
-      reRender();
+      redoClickHandlers();
     }
     if (e.target.dataset.id === 'downArrow') {
       const stockToMove = e.target.parentNode.parentNode.parentNode.dataset.id;
       window.Stokr.Controller.reOrderStocks(stockToMove, 1);
-      reRender();
+      redoClickHandlers();
     }
 
     if (e.target.alt === 'Filter'){
@@ -97,11 +97,12 @@ window.Stokr.View = (function () {
     }
   }
 
-  function reRender() {
-    // console.time('reRender');
+  function redoClickHandlers() {
+    // console.time('redoClickHandlers');
     removeClickHandlersFromDOM();
+    // window.Stokr.Controller.init();
     addClickHandlersToDOM();
-    // console.timeEnd('reRender');
+    // console.timeEnd('redoClickHandlers');
   }
 
   function createFilterPanel() {
@@ -124,7 +125,7 @@ window.Stokr.View = (function () {
 // render function that initiates the HTML string creation and pushes to the document with innerHTML
     displayStockData: function (stockData,featureToggles) {
       document.querySelector('main').innerHTML = stockRowsToStockList(stockData,featureToggles);
-      reRender();
+      redoClickHandlers();
     }
   }
 })();
