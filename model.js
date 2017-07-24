@@ -1,6 +1,9 @@
 window.Stokr.Model = (function () {
+  // todo no logic functions be here
+
   function getRemoteData() {
-    //mockedJSONStringifyData
+    // in the future, this will be a fetch from a DB
+    //to model this call, here is a mockedJSONStringifyData
     return `
     [
       {
@@ -45,28 +48,6 @@ window.Stokr.Model = (function () {
 
     stockDataFetcher: function () {
       return getState();
-    },
-
-    reOrderStocks: function (stockToMove, upOrDownCount) {
-      //todo reach step, allow a variable upOrDownCount to move x spaces
-      const indexToMove = currentStocks.findIndex(stock => {
-        return stock.Symbol === stockToMove;
-      });
-      // console.log(indexToMove);
-      // move up
-
-      if(upOrDownCount === -1 && indexToMove !== 0) {
-        const leftover = currentStocks.splice(indexToMove - 1, 1);
-        // console.log(leftover);
-        currentStocks.splice(indexToMove, 0, leftover[0]);
-        // console.log(currentStocks);
-      }
-      // move down
-      if(upOrDownCount === 1 && indexToMove !== currentStocks.length) {
-        const leftover = currentStocks.splice(indexToMove, 1);
-        currentStocks.splice(indexToMove+1, 0, leftover[0]);
-      }
-      return currentStocks;
     },
 
   }
