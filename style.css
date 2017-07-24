@@ -149,3 +149,25 @@ span {
 .stock-Change[data-change="shrinking"]{
   background-color: #ff4f46;
 }
+
+/*filterPanel styling*/
+.filterPanel {
+  display: flex;
+  flex-flow: column wrap;
+  height: 10vw;
+}
+.filterPanel.formField {
+  /*height: 50%;*/
+  /*flex: 0 1 auto;*/
+}
+
+.filterPanel label {
+  font-family: HelveticaNeueW01-55Roman, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 1.6rem;
+}
+
+.filterPanel button {
+  width: 9vw;
+  height: 9vw;
+  border-radius: 100%;
+}

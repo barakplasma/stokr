@@ -103,8 +103,13 @@ window.Stokr.View = (function () {
     const gainFilter = `<label for="stockGain">By Gain</label><input name="stockGain" type="number" />`;
     const fromRangeFilter = `<label for="fromRange">By Range: From</label><input name="fromRange" type="date" />`;
     const toRangeFilter = `<label for="toRange">By Range: To</label><input name="toRange" type="date" />`;
+    const fields = [nameFilter,gainFilter,fromRangeFilter,toRangeFilter];
+    const wrappedFields = fields.map(field=>{
+      let newField = `<span class="formField">${field}</span>`;
+      return newField;
+    });
     const applyButton = `<button>Apply</button>`;
-    const filterSection = `<div>${nameFilter.concat(gainFilter,fromRangeFilter,toRangeFilter,applyButton)}</div>`;
+    const filterSection = `<div class="filterPanel">${wrappedFields.join('').concat(applyButton)}</div>`;
     return filterSection;
   }
 
