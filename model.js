@@ -43,7 +43,8 @@ window.Stokr.Model = (function () {
 
   return {
     stockSettings: {
-      "changePercentToggle": false
+      "changePercentToggle": false,
+      "featureToggles": []
     },
 
     stockDataFetcher: function () {

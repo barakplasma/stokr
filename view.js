@@ -1,9 +1,9 @@
 window.Stokr.View = (function () {
   // make sure that the view does now save state
 
-  function stockRowsToStockList (stockData, featureToggles) {
+  function stockRowsToStockList (stockData, settings) {
     // noinspection UnnecessaryLocalVariableJS
-    const html = `${featureToggles.includes('filterPanel')?createFilterPanel():''}<ul class="stockList">${stockRowGenerator(stockData).join('')}</ul>`;
+    const html = `${settings.featureToggles.includes('filterPanel')?createFilterPanel():''}<ul class="stockList">${stockRowGenerator(stockData).join('')}</ul>`;
     return html;
   }
 
@@ -64,6 +64,8 @@ window.Stokr.View = (function () {
   function dataIDClickHandler(e) {
     // console.dir(e);
 
+    console.dir(e.target);
+
     // console.dir(e.target.parentNode.dataset.id);
 
     // console.log(stockDataFetcher().find(row => {
@@ -88,6 +90,10 @@ window.Stokr.View = (function () {
       const stockToMove = e.target.parentNode.parentNode.parentNode.dataset.id;
       window.Stokr.Controller.reOrderStocks(stockToMove, 1);
       reRender();
+    }
+
+    if (e.target.alt === 'Filter'){
+      window.Stokr.Controller.toggleFeatures('Filter');
     }
   }
 

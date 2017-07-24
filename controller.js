@@ -3,7 +3,17 @@ window.Stokr.Controller = (function () {
 
   return {
     init: function () {
-      window.Stokr.View.displayStockData(window.Stokr.Model.stockDataFetcher(),['filterPanel']);
+      window.Stokr.View.displayStockData(window.Stokr.Model.stockDataFetcher(),window.Stokr.Model.stockSettings);
+    },
+
+    toggleFeatures: function (e) {
+      if(e === 'Filter') {
+        window.Stokr.Model.stockSettings.featureToggles = ['filterPanel'];
+      }
+      if(e === 'reset'){
+        window.Stokr.Model.stockSettings.featureToggles = [];
+      }
+      this.init();
     },
 
     concatenateStockSymbolAndName: function (stock) {
@@ -43,7 +53,7 @@ window.Stokr.Controller = (function () {
         const leftover = currentStocks.splice(indexToMove, 1);
         currentStocks.splice(indexToMove+1, 0, leftover[0]);
       }
-      window.Stokr.View.displayStockData(currentStocks);
+      window.Stokr.View.displayStockData(currentStocks,window.Stokr.Model.stockSettings);
     },
   }
 })();
