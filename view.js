@@ -1,9 +1,9 @@
 window.Stokr.View = (function () {
   // make sure that the view does now save state
 
-  function stockRowsToStockList (stockData) {
+  function stockRowsToStockList (stockData, featureToggles) {
     // noinspection UnnecessaryLocalVariableJS
-    const html = `<ul class="stockList">${stockRowGenerator(stockData).join('')}</ul>`;
+    const html = `${featureToggles.includes('filterPanel')?createFilterPanel():''}<ul class="stockList">${stockRowGenerator(stockData).join('')}</ul>`;
     return html;
   }
 
@@ -98,11 +98,21 @@ window.Stokr.View = (function () {
     // console.timeEnd('reRender');
   }
 
+  function createFilterPanel() {
+    const nameFilter = `<label for="stockName">By Name</label><input name="stockName" type="text" />`;
+    const gainFilter = `<label for="stockGain">By Gain</label><input name="stockGain" type="number" />`;
+    const fromRangeFilter = `<label for="fromRange">By Range: From</label><input name="fromRange" type="date" />`;
+    const toRangeFilter = `<label for="toRange">By Range: To</label><input name="toRange" type="date" />`;
+    const applyButton = `<button>Apply</button>`;
+    const filterSection = `<div>${nameFilter.concat(gainFilter,fromRangeFilter,toRangeFilter,applyButton)}</div>`;
+    return filterSection;
+  }
+
   return {
 
 // render function that initiates the HTML string creation and pushes to the document with innerHTML
-    displayStockData: function (stockData) {
-      document.querySelector('main').innerHTML = stockRowsToStockList(stockData);
+    displayStockData: function (stockData,featureToggles) {
+      document.querySelector('main').innerHTML = stockRowsToStockList(stockData,featureToggles);
       reRender();
     }
   }

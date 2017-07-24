@@ -3,7 +3,7 @@ window.Stokr.Controller = (function () {
 
   return {
     init: function () {
-      window.Stokr.View.displayStockData(window.Stokr.Model.stockDataFetcher());
+      window.Stokr.View.displayStockData(window.Stokr.Model.stockDataFetcher(),['filterPanel']);
     },
 
     concatenateStockSymbolAndName: function (stock) {
