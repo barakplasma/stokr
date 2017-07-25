@@ -167,7 +167,7 @@ body > div.container > main > ul > li:last-child > div > svg:last-child #DownTri
 .filterPanel .formField {
   display: flex;
   justify-content: space-between;
-  align-content: space-around;
+  align-items: center;
   height: 50%;
   margin-right: 2rem;
   /*flex: 0 1 auto;*/
