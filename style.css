@@ -169,6 +169,7 @@ body > div.container > main > ul > li:last-child > div > svg:last-child #DownTri
   justify-content: space-between;
   align-content: space-around;
   height: 50%;
+  margin-right: 2rem;
   /*flex: 0 1 auto;*/
 }
 
