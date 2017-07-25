@@ -103,7 +103,7 @@ window.Stokr.View = (function () {
     }
 
     if (e.target.id ==='filterApply'){
-      let filterSettings = document.querySelectorAll('input');
+      let filterSettings = document.querySelectorAll('input,select');
       sendFilterSettings(filterSettings);
     }
   }
@@ -118,7 +118,9 @@ window.Stokr.View = (function () {
 
   function createFilterPanel() {
     const nameFilter = `<label for="stockName">By Name</label><input name="stockName" type="text" />`;
-    const gainFilter = `<label for="stockGain">By Gain</label><input name="stockGain" type="number" />`;
+    const gainFilter = `<label for="stockGain">By Gain</label><select name="stockGain"><option value="all" selected>all
+</option><option value"gaining
+">gaining</option><option value="losing">losing</option></select>`;
     const fromRangeFilter = `<label for="fromRange">By Range: From</label><input name="fromRange" type="date" />`;
     const toRangeFilter = `<label for="toRange">By Range: To</label><input name="toRange" type="date" />`;
     const fields = [nameFilter,gainFilter,fromRangeFilter,toRangeFilter];
