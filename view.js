@@ -1,8 +1,7 @@
 window.Stokr.View = (function () {
   // make sure that the view does now save state
-
+  // todo render filter panel apart from stock data display
   function stockRowsToStockList (stockData, settings) {
-    // noinspection UnnecessaryLocalVariableJS
     const html = `${settings.featureToggles.filterPanel?createFilterPanel():''}<ul class="stockList">${stockRowGenerator(stockData,settings).join('')}</ul>`;
     return html;
   }
@@ -16,7 +15,6 @@ window.Stokr.View = (function () {
 
 // Added data-id to components in the HTML so we can find it’s related data using the clickHandler
   function createStockRow (stock,settings) {
-    // noinspection UnnecessaryLocalVariableJS
     const row = `
    <li class="stockRow" data-id="${stock.Symbol}">
      <span class="stock-data stock-name" aria-label="Stock Symbol & Stock Name">
@@ -132,7 +130,10 @@ window.Stokr.View = (function () {
   }
 
   function sendFilterSettings(filterSettings) {
-    window.Stokr.Controller.filterStocks(filterSettings);
+    // console.log('preObj ',filterSettings);
+    let filterSettingsObject = {};
+    filterSettings.forEach(setting=>{filterSettingsObject[setting.name]=setting.value});
+    window.Stokr.Controller.filterStocks(filterSettingsObject);
   }
 
   return {

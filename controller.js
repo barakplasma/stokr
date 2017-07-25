@@ -61,12 +61,45 @@ window.Stokr.Controller = (function () {
     },
 
     filterStocks: function (filterSettings) {
-      console.log('filterSettings: ');
-      let filterSettingsObject = {};
-      filterSettings.forEach(setting=>{filterSettingsObject[setting.name]=setting.value});
-      console.log(filterSettingsObject);
-    }
+      // console.log('filterSettings: ',filterSettings);
+      window.Stokr.Model.stockSettings.filterSettings = filterSettings;
+      let currentStocks = window.Stokr.Model.stockDataFetcher();
+      // console.log(currentStocks); //beforeFilter
+      let filteredStocks = currentStocks.filter(stock=>{
+        if(filterSettings.stockName !== ''){
+          return stock.Name.includes(filterSettings.stockName);
+        }
+        else{return true};
+      }).filter(stock=>{
+        if(filterSettings.stockGain !== ''){
+          if(filterSettings.stockGain==='gaining'){
+            return stock.Change>0;
+          }
+          if(filterSettings.stockGain==='losing'){
+            return stock.Change<0;
+          }
+          if(filterSettings.stockGain==='all'){
+            return true;
+          }
+        }
+        else{return true};
+      }).filter(stock=>{
+        if(filterSettings.fromRange !== ''){
+          return filterSettings.fromRange ;
+        }
+        else{return true};
+      }).filter(stock=>{
+        if(filterSettings.toRange !== ''){
+          return filterSettings.toRange ;
+        }
+        else{return true};
+      });
+      console.log(filteredStocks); //afterFilter
+      window.Stokr.View.displayStockData(currentStocks,window.Stokr.Model.stockSettings);
+      return filteredStocks;
+    },
   }
 })();
 
 window.Stokr.Controller.init();
+console.assert(window.Stokr.Controller.filterStocks({"stockName":"Wix","stockGain":"gaining","fromRange":"2017-06-25","toRange":"2017-07-28"})[0].Symbol==='WIX',`filter isn't working`);
