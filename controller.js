@@ -88,12 +88,12 @@ window.Stokr.Controller = (function () {
         else{return true};
       }).filter(stock=>{
         if(filterSettings.fromRange !== ''){
-          return filterSettings.fromRange ;
+          return stock.LastTradePriceOnly > filterSettings.fromRange;
         }
         else{return true};
       }).filter(stock=>{
         if(filterSettings.toRange !== ''){
-          return filterSettings.toRange ;
+          return stock.LastTradePriceOnly < filterSettings.toRange ;
         }
         else{return true};
       });
@@ -106,7 +106,7 @@ window.Stokr.Controller = (function () {
 
 window.Stokr.Controller.init();
 function test() {
-  console.assert(window.Stokr.Controller.filterStocks({"stockName":"wix","stockGain":"gaining","fromRange":"2017-06-25","toRange":"2017-07-28"})[0].Symbol==='WIX',`filter isn't working`);
+  console.assert(window.Stokr.Controller.filterStocks({"stockName":"wix","stockGain":"gaining","fromRange":"1","toRange":"80"})[0].Symbol==='WIX',`filter isn't working`);
   // resetFilterTest
   window.Stokr.Controller.filterStocks({"stockName":"","stockGain":"","fromRange":"","toRange":""});
 }

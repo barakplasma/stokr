@@ -118,8 +118,10 @@ window.Stokr.View = (function () {
     const gainFilter = `<label for="stockGain">By Gain</label><select name="stockGain"><option value="all" selected>all
 </option><option value"gaining
 ">gaining</option><option value="losing">losing</option></select>`;
-    const fromRangeFilter = `<label for="fromRange">By Range: From</label><input name="fromRange" type="date" />`;
-    const toRangeFilter = `<label for="toRange">By Range: To</label><input name="toRange" type="date" />`;
+    const fromRangeFilter = `<label for="fromRange">By Price Range: From</label><input name="fromRange" type="number" min="0" 
+step="0.01"/>`;
+    const toRangeFilter = `<label for="toRange">By Price Range: To</label><input name="toRange" type="number" min="0" 
+step="0.01"/>`;
     const fields = [nameFilter, gainFilter, fromRangeFilter, toRangeFilter];
     const wrappedFields = fields.map(field => {
       let newField = `<span class="formField">${field}</span>`;
