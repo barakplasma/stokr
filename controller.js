@@ -59,6 +59,11 @@ window.Stokr.Controller = (function () {
       }
       window.Stokr.View.displayStockData(currentStocks,window.Stokr.Model.stockSettings);
     },
+
+    filterStocks: function (filterSettings) {
+      console.log('filter set');
+      console.log('filterSettings: ', filterSettings);
+    }
   }
 })();
 

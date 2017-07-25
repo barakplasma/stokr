@@ -51,12 +51,18 @@ window.Stokr.View = (function () {
     // very general click handler
     document.querySelector('.container').addEventListener('click', dataIDClickHandler);
     document.querySelector('.container').addEventListener('touchstart', dataIDClickHandler);
+    if(document.querySelector('.filterPanel')){
+      document.querySelector('.filterPanel').addEventListener('input', dataIDClickHandler);
+    }
     // there is a utility function to removeClickHandlersFromDOM()
   }
 
   function removeClickHandlersFromDOM() {
     document.querySelector('.container').removeEventListener('click', dataIDClickHandler);
     document.querySelector('.container').removeEventListener('touchstart', dataIDClickHandler);
+    if(document.querySelector('.filterPanel')){
+      document.querySelector('.filterPanel').removeEventListener('input', dataIDClickHandler);
+    }
     // console.log('removed ID click handler');
   }
 
@@ -64,7 +70,7 @@ window.Stokr.View = (function () {
   function dataIDClickHandler(e) {
     // console.dir(e);
 
-    // console.dir(e.target);
+    console.dir(e.target);
 
     // console.dir(e.target.parentNode.dataset.id);
 
@@ -95,6 +101,11 @@ window.Stokr.View = (function () {
     if (e.target.alt === 'Filter'){
       window.Stokr.Controller.toggleFeatures('Filter');
     }
+
+    if (e.target.id ==='filterApply'){
+      let filterSettings = document.querySelectorAll('input');
+      sendFilterSettings(filterSettings);
+    }
   }
 
   function redoClickHandlers() {
@@ -115,9 +126,13 @@ window.Stokr.View = (function () {
       let newField = `<span class="formField">${field}</span>`;
       return newField;
     });
-    const applyButton = `<button>Apply</button>`;
+    const applyButton = `<button id="filterApply">Apply</button>`;
     const filterSection = `<div class="filterPanel">${wrappedFields.join('').concat(applyButton)}</div>`;
     return filterSection;
+  }
+
+  function sendFilterSettings(filterSettings) {
+    window.Stokr.Controller.filterStocks(filterSettings);
   }
 
   return {
