@@ -164,9 +164,20 @@ body > div.container > main > ul > li:last-child > div > svg:last-child #DownTri
   flex-flow: column wrap;
   height: 10vw;
 }
-.filterPanel.formField {
-  /*height: 50%;*/
+.filterPanel .formField {
+  display: flex;
+  justify-content: space-between;
+  align-content: space-around;
+  height: 50%;
   /*flex: 0 1 auto;*/
+}
+
+.filterPanel .formField input {
+  height: 1rem;
+}
+
+.filterPanel select {
+  width: 40%;
 }
 
 .filterPanel label {
