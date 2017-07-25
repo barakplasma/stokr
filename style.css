@@ -111,6 +111,12 @@ span {
   height: 2rem;
 }
 
+body > div.container > main > ul > li:first-child > div > svg:first-child #UpTriangle,
+body > div.container > main > ul > li:last-child > div > svg:last-child #DownTriangle
+{
+  fill: rgba(171, 171, 171, 0.2);
+}
+
 /*font related*/
 .stock-name {
   font-family: Avenir, sans-serif;
