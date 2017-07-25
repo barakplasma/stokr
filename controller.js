@@ -61,8 +61,10 @@ window.Stokr.Controller = (function () {
     },
 
     filterStocks: function (filterSettings) {
-      console.log('filter set');
-      console.log('filterSettings: ', filterSettings);
+      console.log('filterSettings: ');
+      let filterSettingsObject = {};
+      filterSettings.forEach(setting=>{filterSettingsObject[setting.name]=setting.value});
+      console.log(filterSettingsObject);
     }
   }
 })();

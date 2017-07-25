@@ -69,11 +69,9 @@ window.Stokr.View = (function () {
 // On events, find the `data-id` of the item and find it’s data based on that id
   function dataIDClickHandler(e) {
     // console.dir(e);
-
-    console.dir(e.target);
-
+    // console.dir(e.target);
+    // console.dir(e.target.value);
     // console.dir(e.target.parentNode.dataset.id);
-
     // console.log(stockDataFetcher().find(row => {
     //   return row.Symbol === e.target.parentNode.dataset.id;
     // }));
