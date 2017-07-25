@@ -8,10 +8,14 @@ window.Stokr.Controller = (function () {
 
     toggleFeatures: function (e) {
       if(e === 'Filter') {
-        window.Stokr.Model.stockSettings.featureToggles = ['filterPanel'];
+        if(window.Stokr.Model.stockSettings.featureToggles.filterPanel === true){
+          window.Stokr.Model.stockSettings.featureToggles.filterPanel = false;
+        }else{
+          window.Stokr.Model.stockSettings.featureToggles.filterPanel = true;
+        }
       }
       if(e === 'reset'){
-        window.Stokr.Model.stockSettings.featureToggles = [];
+        //implement for of loop on properties to false
       }
       this.init();
     },

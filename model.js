@@ -44,7 +44,9 @@ window.Stokr.Model = (function () {
   return {
     stockSettings: {
       "changePercentToggle": false,
-      "featureToggles": []
+      "featureToggles": {
+        filterPanel: false
+      }
     },
 
     stockDataFetcher: function () {

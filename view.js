@@ -3,19 +3,19 @@ window.Stokr.View = (function () {
 
   function stockRowsToStockList (stockData, settings) {
     // noinspection UnnecessaryLocalVariableJS
-    const html = `${settings.featureToggles.includes('filterPanel')?createFilterPanel():''}<ul class="stockList">${stockRowGenerator(stockData).join('')}</ul>`;
+    const html = `${settings.featureToggles.filterPanel?createFilterPanel():''}<ul class="stockList">${stockRowGenerator(stockData,settings).join('')}</ul>`;
     return html;
   }
 
-  function stockRowGenerator  (stockData) {
+  function stockRowGenerator  (stockData, settings) {
     // const stockData = stockDataFetcher();
     return stockData.map(stock => {
-      return createStockRow(stock);
+      return createStockRow(stock,settings);
     });
   }
 
 // Added data-id to components in the HTML so we can find it’s related data using the clickHandler
-  function createStockRow (stock) {
+  function createStockRow (stock,settings) {
     // noinspection UnnecessaryLocalVariableJS
     const row = `
    <li class="stockRow" data-id="${stock.Symbol}">
@@ -28,7 +28,7 @@ window.Stokr.View = (function () {
      <span class="stock-data stock-Change" data-change="${window.Stokr.Controller.stockGainOrLoss(stock)}" aria-label="Stock PercentChange">
       ${stock[window.Stokr.Controller.getStockSettings()]}
      </span>
-     <div class="stock-position" aria-label="Row Up and Down Arrows">
+     <div class="stock-position" style="${settings.featureToggles.filterPanel?`display: none;`:``}" aria-label="Row Up and Down Arrows">
      <svg class="arrows" viewBox="0 0 33 25" 
      version="1.1" 
      xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
