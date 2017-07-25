@@ -3,11 +3,19 @@ window.Stokr.View = (function () {
   // todo render filter panel with stock data display and ui state
   // https://wix-kickstart-2017.slack.com/archives/C5G408NHK/p1500992023789897
   function stockRowsToStockList(stockData, settings) {
-    const html = `<ul class="stockList">${stockRowGenerator(stockData, settings).join('')}</ul>`;
+    const html = `${generateFilterArea(settings)}<ul class="stockList">${stockRowGenerator(stockData, settings).join('')}</ul>`;
     return html;
   }
 
-  //todo hashchange event and handler for search
+  function generateFilterArea(settings) {
+    if (settings.featureToggles.filterPanel) {
+      return createFilterPanel(settings);
+    } else {
+      return '';
+    }
+  }
+
+  //hashchange event and handler for search
 
   function stockRowGenerator(stockData, settings) {
     // const stockData = stockDataFetcher();
@@ -118,15 +126,22 @@ window.Stokr.View = (function () {
   }
 
   // todo https://wix-kickstart-2017.slack.com/archives/C5G408NHK/p1500988337716456
-  function createFilterPanel() {
-    const nameFilter = `<label for="stockName">By Name</label><input name="stockName" type="text" />`;
-    const gainFilter = `<label for="stockGain">By Gain</label><select name="stockGain"><option value="all" selected>all
-</option><option value"gaining
-">gaining</option><option value="losing">losing</option></select>`;
-    const fromRangeFilter = `<label for="fromRange">By Price Range: From</label><input name="fromRange" type="number" min="0" 
-step="0.01"/>`;
-    const toRangeFilter = `<label for="toRange">By Price Range: To</label><input name="toRange" type="number" min="0" 
-step="0.01"/>`;
+  function createFilterPanel(settings) {
+    const nameFilter = `<label for="stockName">By Name</label><input name="stockName" type="text" value="${settings.filterSettings.stockName}"/>`;
+    const gainFilter = `
+      <label for="stockGain">By Gain</label>
+      <select name="stockGain" value="${settings.filterSettings.stockGain}">
+      <option value="all">all</option>
+      <option value="gaining">gaining</option>
+      <option value="losing">losing</option>
+      </select>
+    `;
+    const fromRangeFilter = `
+      <label for="fromRange">By Price Range: From</label>
+      <input name="fromRange" type="number" min="0" step="0.01"  value="${settings.filterSettings.fromRange}"/>`;
+    const toRangeFilter = `
+      <label for="toRange">By Price Range: To</label>
+      <input name="toRange" type="number" min="0" step="0.01" value="${settings.filterSettings.toRange}"/>`;
     const fields = [nameFilter, gainFilter, fromRangeFilter, toRangeFilter];
     const wrappedFields = fields.map(field => {
       let newField = `<span class="formField">${field}</span>`;
@@ -149,7 +164,8 @@ step="0.01"/>`;
   function hashChangeHandler() {
     window.Stokr.Controller.init();
   }
-  function createSearchRoute () {
+
+  function createSearchRoute() {
     document.querySelector('main').innerHTML = `
       <div class="searchRoute"><input placeholder="CANCEL"><div><a href="#">Return to Main View</a></div></div>
     `;
@@ -158,24 +174,15 @@ step="0.01"/>`;
   return {
 // todo refactor input the filter values from the model into the view on rerender instead of current
 // render function that initiates the HTML string creation and pushes to the document with innerHTML
-   /* todo `View.render` should check the URL hash and render the relevant view based on the hash
-    `window.location.hash` */
+    /* todo `View.render` should check the URL hash and render the relevant view based on the hash
+     `window.location.hash` */
     displayStockData: function (stockData, settings) {
-      if(window.location.hash==='#search'){
+      if (window.location.hash === '#search') {
         createSearchRoute();
       }
       else {
         document.querySelector('main').innerHTML = stockRowsToStockList(stockData, settings);
         redoClickHandlers();
-        let filterPanelLocation = document.querySelector('.filterPanel_Container');
-        let filterPanelGenerated = filterPanelLocation.innerHTML !== '';
-        // console.log(settings);
-        if (settings.featureToggles.filterPanel && !filterPanelGenerated) {
-          filterPanelLocation.innerHTML = createFilterPanel();
-        }
-        if (!settings.featureToggles.filterPanel && filterPanelGenerated) {
-          filterPanelLocation.innerHTML = '';
-        }
       }
     }
   }
