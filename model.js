@@ -1,5 +1,6 @@
 window.Stokr.Model = (function () {
   // todo no logic functions be here
+  // don't save filtered stocks in model
 
   function getRemoteData() {
     // in the future, this will be a fetch from a DB

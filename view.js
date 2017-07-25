@@ -1,10 +1,13 @@
 window.Stokr.View = (function () {
   // make sure that the view does now save state
-  // todo render filter panel apart from stock data display
+  // todo render filter panel with stock data display and ui state
+  // https://wix-kickstart-2017.slack.com/archives/C5G408NHK/p1500992023789897
   function stockRowsToStockList(stockData, settings) {
     const html = `<ul class="stockList">${stockRowGenerator(stockData, settings).join('')}</ul>`;
     return html;
   }
+
+  //todo hashchange event and handler for search
 
   function stockRowGenerator(stockData, settings) {
     // const stockData = stockDataFetcher();
@@ -44,7 +47,7 @@ window.Stokr.View = (function () {
     return row;
   }
 
-  // todo put event listeners into view (since they aren't relevant in a CLI for example)
+  // put event listeners into view (since they aren't relevant in a CLI for example)
   // Added event listeners to containers after the HTML was rendered (event delegation)
   function addClickHandlersToDOM() {
     // very general click handler
@@ -53,6 +56,7 @@ window.Stokr.View = (function () {
     if (document.querySelector('.filterPanel')) {
       document.querySelector('.filterPanel').addEventListener('input', dataIDClickHandler);
     }
+    window.addEventListener('hashchange', hashChangeHandler);
     // there is a utility function to removeClickHandlersFromDOM()
   }
 
@@ -113,6 +117,7 @@ window.Stokr.View = (function () {
     // console.timeEnd('redoClickHandlers');
   }
 
+  // todo https://wix-kickstart-2017.slack.com/archives/C5G408NHK/p1500988337716456
   function createFilterPanel() {
     const nameFilter = `<label for="stockName">By Name</label><input name="stockName" type="text" />`;
     const gainFilter = `<label for="stockGain">By Gain</label><select name="stockGain"><option value="all" selected>all
@@ -141,21 +146,37 @@ step="0.01"/>`;
     window.Stokr.Controller.filterStocks(filterSettingsObject);
   }
 
-  return {
+  function hashChangeHandler() {
+    window.Stokr.Controller.init();
+  }
+  function createSearchRoute () {
+    document.querySelector('main').innerHTML = `
+      <div class="searchRoute"><input placeholder="CANCEL"><div><a href="#">Return to Main View</a></div></div>
+    `;
+  }
 
+  return {
+// todo refactor input the filter values from the model into the view on rerender instead of current
 // render function that initiates the HTML string creation and pushes to the document with innerHTML
+   /* todo `View.render` should check the URL hash and render the relevant view based on the hash
+    `window.location.hash` */
     displayStockData: function (stockData, settings) {
-      let filterPanelLocation = document.querySelector('.filterPanel_Container');
-      let filterPanelGenerated = filterPanelLocation.innerHTML !== '';
-      // console.log(settings);
-      if (settings.featureToggles.filterPanel && !filterPanelGenerated) {
-        filterPanelLocation.innerHTML = createFilterPanel();
+      if(window.location.hash==='#search'){
+        createSearchRoute();
       }
-      if (!settings.featureToggles.filterPanel && filterPanelGenerated) {
-        filterPanelLocation.innerHTML = '';
+      else {
+        document.querySelector('main').innerHTML = stockRowsToStockList(stockData, settings);
+        redoClickHandlers();
+        let filterPanelLocation = document.querySelector('.filterPanel_Container');
+        let filterPanelGenerated = filterPanelLocation.innerHTML !== '';
+        // console.log(settings);
+        if (settings.featureToggles.filterPanel && !filterPanelGenerated) {
+          filterPanelLocation.innerHTML = createFilterPanel();
+        }
+        if (!settings.featureToggles.filterPanel && filterPanelGenerated) {
+          filterPanelLocation.innerHTML = '';
+        }
       }
-      document.querySelector('.stockList').innerHTML = stockRowsToStockList(stockData, settings);
-      redoClickHandlers();
     }
   }
 })();
