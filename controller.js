@@ -1,5 +1,7 @@
 window.Stokr.Controller = (function () {
-  // todo state is stored in the model, and passed into the view as an arg
+  // state is stored in the model, and passed into the view as an arg
+
+  // todo breakup filterStocks functions to separate functions here
 
   return {
     init: function () {
@@ -95,7 +97,7 @@ window.Stokr.Controller = (function () {
         }
         else{return true};
       });
-      console.log(filteredStocks); //afterFilter
+      // console.log(filteredStocks); //afterFilter
       window.Stokr.View.displayStockData(filteredStocks,window.Stokr.Model.stockSettings);
       return filteredStocks;
     },
