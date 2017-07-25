@@ -1,20 +1,20 @@
 window.Stokr.View = (function () {
   // make sure that the view does now save state
   // todo render filter panel apart from stock data display
-  function stockRowsToStockList (stockData, settings) {
-    const html = `${settings.featureToggles.filterPanel?createFilterPanel():''}<ul class="stockList">${stockRowGenerator(stockData,settings).join('')}</ul>`;
+  function stockRowsToStockList(stockData, settings) {
+    const html = `<ul class="stockList">${stockRowGenerator(stockData, settings).join('')}</ul>`;
     return html;
   }
 
-  function stockRowGenerator  (stockData, settings) {
+  function stockRowGenerator(stockData, settings) {
     // const stockData = stockDataFetcher();
     return stockData.map(stock => {
-      return createStockRow(stock,settings);
+      return createStockRow(stock, settings);
     });
   }
 
 // Added data-id to components in the HTML so we can find it’s related data using the clickHandler
-  function createStockRow (stock,settings) {
+  function createStockRow(stock, settings) {
     const row = `
    <li class="stockRow" data-id="${stock.Symbol}">
      <span class="stock-data stock-name" aria-label="Stock Symbol & Stock Name">
@@ -26,7 +26,7 @@ window.Stokr.View = (function () {
      <span class="stock-data stock-Change" data-change="${window.Stokr.Controller.stockGainOrLoss(stock)}" aria-label="Stock PercentChange">
       ${stock[window.Stokr.Controller.getStockSettings()]}
      </span>
-     <div class="stock-position" style="${settings.featureToggles.filterPanel?`display: none;`:``}" aria-label="Row Up and Down Arrows">
+     <div class="stock-position" style="${settings.featureToggles.filterPanel ? `display: none;` : ``}" aria-label="Row Up and Down Arrows">
      <svg class="arrows" viewBox="0 0 33 25" 
      version="1.1" 
      xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -43,13 +43,14 @@ window.Stokr.View = (function () {
  `;
     return row;
   }
+
   // todo put event listeners into view (since they aren't relevant in a CLI for example)
   // Added event listeners to containers after the HTML was rendered (event delegation)
   function addClickHandlersToDOM() {
     // very general click handler
     document.querySelector('.container').addEventListener('click', dataIDClickHandler);
     document.querySelector('.container').addEventListener('touchstart', dataIDClickHandler);
-    if(document.querySelector('.filterPanel')){
+    if (document.querySelector('.filterPanel')) {
       document.querySelector('.filterPanel').addEventListener('input', dataIDClickHandler);
     }
     // there is a utility function to removeClickHandlersFromDOM()
@@ -58,7 +59,7 @@ window.Stokr.View = (function () {
   function removeClickHandlersFromDOM() {
     document.querySelector('.container').removeEventListener('click', dataIDClickHandler);
     document.querySelector('.container').removeEventListener('touchstart', dataIDClickHandler);
-    if(document.querySelector('.filterPanel')){
+    if (document.querySelector('.filterPanel')) {
       document.querySelector('.filterPanel').removeEventListener('input', dataIDClickHandler);
     }
     // console.log('removed ID click handler');
@@ -94,11 +95,11 @@ window.Stokr.View = (function () {
       redoClickHandlers();
     }
 
-    if (e.target.alt === 'Filter'){
+    if (e.target.alt === 'Filter') {
       window.Stokr.Controller.toggleFeatures('Filter');
     }
 
-    if (e.target.id ==='filterApply'){
+    if (e.target.id === 'filterApply') {
       let filterSettings = document.querySelectorAll('input,select');
       sendFilterSettings(filterSettings);
     }
@@ -119,8 +120,8 @@ window.Stokr.View = (function () {
 ">gaining</option><option value="losing">losing</option></select>`;
     const fromRangeFilter = `<label for="fromRange">By Range: From</label><input name="fromRange" type="date" />`;
     const toRangeFilter = `<label for="toRange">By Range: To</label><input name="toRange" type="date" />`;
-    const fields = [nameFilter,gainFilter,fromRangeFilter,toRangeFilter];
-    const wrappedFields = fields.map(field=>{
+    const fields = [nameFilter, gainFilter, fromRangeFilter, toRangeFilter];
+    const wrappedFields = fields.map(field => {
       let newField = `<span class="formField">${field}</span>`;
       return newField;
     });
@@ -132,15 +133,23 @@ window.Stokr.View = (function () {
   function sendFilterSettings(filterSettings) {
     // console.log('preObj ',filterSettings);
     let filterSettingsObject = {};
-    filterSettings.forEach(setting=>{filterSettingsObject[setting.name]=setting.value});
+    filterSettings.forEach(setting => {
+      filterSettingsObject[setting.name] = setting.value
+    });
     window.Stokr.Controller.filterStocks(filterSettingsObject);
   }
 
   return {
 
 // render function that initiates the HTML string creation and pushes to the document with innerHTML
-    displayStockData: function (stockData,featureToggles) {
-      document.querySelector('main').innerHTML = stockRowsToStockList(stockData,featureToggles);
+    displayStockData: function (stockData, settings) {
+      let filterPanelLocation = document.querySelector('.filterPanel_Container');
+      let filterPanelGenerated = filterPanelLocation.innerHTML !== '';
+      // console.log(settings);
+      if (settings.featureToggles.filterPanel && !filterPanelGenerated) {
+        filterPanelLocation.innerHTML = createFilterPanel();
+      }
+      document.querySelector('.stockList').innerHTML = stockRowsToStockList(stockData, settings);
       redoClickHandlers();
     }
   }

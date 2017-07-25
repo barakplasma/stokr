@@ -13,6 +13,7 @@ window.Stokr.Controller = (function () {
         }else{
           window.Stokr.Model.stockSettings.featureToggles.filterPanel = true;
         }
+        this.init();
       }
       if(e === 'reset'){
         //implement for of loop on properties to false
@@ -67,7 +68,7 @@ window.Stokr.Controller = (function () {
       // console.log(currentStocks); //beforeFilter
       let filteredStocks = currentStocks.filter(stock=>{
         if(filterSettings.stockName !== ''){
-          return stock.Name.includes(filterSettings.stockName);
+          return stock.Name.toUpperCase().includes(filterSettings.stockName.toUpperCase()) || stock.Symbol.toUpperCase().includes(filterSettings.stockName.toUpperCase());
         }
         else{return true};
       }).filter(stock=>{
@@ -95,11 +96,16 @@ window.Stokr.Controller = (function () {
         else{return true};
       });
       console.log(filteredStocks); //afterFilter
-      window.Stokr.View.displayStockData(currentStocks,window.Stokr.Model.stockSettings);
+      window.Stokr.View.displayStockData(filteredStocks,window.Stokr.Model.stockSettings);
       return filteredStocks;
     },
   }
 })();
 
 window.Stokr.Controller.init();
-console.assert(window.Stokr.Controller.filterStocks({"stockName":"Wix","stockGain":"gaining","fromRange":"2017-06-25","toRange":"2017-07-28"})[0].Symbol==='WIX',`filter isn't working`);
+function test() {
+  console.assert(window.Stokr.Controller.filterStocks({"stockName":"wix","stockGain":"gaining","fromRange":"2017-06-25","toRange":"2017-07-28"})[0].Symbol==='WIX',`filter isn't working`);
+  // resetFilterTest
+  window.Stokr.Controller.filterStocks({"stockName":"","stockGain":"","fromRange":"","toRange":""});
+}
+test();
