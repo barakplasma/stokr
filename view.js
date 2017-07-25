@@ -1,6 +1,6 @@
 window.Stokr.View = (function () {
   // make sure that the view does now save state
-  // todo render filter panel with stock data display and ui state
+  // render filter panel with stock data display and ui state
   // https://wix-kickstart-2017.slack.com/archives/C5G408NHK/p1500992023789897
   function stockRowsToStockList(stockData, settings) {
     const html = `${generateFilterArea(settings)}<ul class="stockList">${stockRowGenerator(stockData, settings).join('')}</ul>`;
@@ -125,7 +125,7 @@ window.Stokr.View = (function () {
     // console.timeEnd('redoClickHandlers');
   }
 
-  // todo https://wix-kickstart-2017.slack.com/archives/C5G408NHK/p1500988337716456
+  // reach todo filterPanel to form from querySelectorAll
   function createFilterPanel(settings) {
     const nameFilter = `<label for="stockName">By Name</label><input name="stockName" type="text" value="${settings.filterSettings.stockName}"/>`;
     const gainFilter = `
@@ -172,10 +172,9 @@ window.Stokr.View = (function () {
   }
 
   return {
-// todo refactor input the filter values from the model into the view on rerender instead of current
+// filter values come from the model on rerender
 // render function that initiates the HTML string creation and pushes to the document with innerHTML
-    /* todo `View.render` should check the URL hash and render the relevant view based on the hash
-     `window.location.hash` */
+    /* checks the URL hash and renders the relevant view based on the url hash */
     displayStockData: function (stockData, settings) {
       if (window.location.hash === '#search') {
         createSearchRoute();
