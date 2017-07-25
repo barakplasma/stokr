@@ -149,6 +149,9 @@ window.Stokr.View = (function () {
       if (settings.featureToggles.filterPanel && !filterPanelGenerated) {
         filterPanelLocation.innerHTML = createFilterPanel();
       }
+      if (!settings.featureToggles.filterPanel && filterPanelGenerated) {
+        filterPanelLocation.innerHTML = '';
+      }
       document.querySelector('.stockList').innerHTML = stockRowsToStockList(stockData, settings);
       redoClickHandlers();
     }
