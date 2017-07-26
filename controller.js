@@ -4,19 +4,20 @@ window.Stokr.Controller = (function () {
   // todo breakup filterStocks functions to separate functions here
 
   function processModel() {
-    return window.Stokr.Model.stockDataFetcher().map(stock=>{
+    return window.Stokr.Model.stockDataFetcher()
+      .then(res=>res.map(stock=>{
       stock.PercentChange = calculatePercentChange(stock.LastTradePriceOnly,stock.Change);
       return stock;
-    });
+    }));
   }
 
   function calculatePercentChange(price,change) {
-    return (change/price*100).toFixed(2);
+    return `${(change/price*100).toFixed(2)}%`;
   }
 
   return {
     init: function () {
-      window.Stokr.View.displayStockData(processModel(),window.Stokr.Model.stockSettings);
+      processModel().then(modelData=>window.Stokr.View.displayStockData(modelData,window.Stokr.Model.stockSettings))
     },
 
     toggleFeatures: function (e) {
