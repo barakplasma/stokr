@@ -23,7 +23,7 @@ window.Stokr.View = (function () {
       ${window.Stokr.Controller.roundPrice(stock.LastTradePriceOnly)}
      </span>
      <span class="stock-data stock-Change" data-change="${window.Stokr.Controller.stockGainOrLoss(stock)}" aria-label="Stock PercentChange">
-      ${stock[window.Stokr.Controller.getStockSettings()]}
+      ${window.Stokr.Controller.roundPrice(parseFloat(stock[window.Stokr.Controller.getStockSettings()]))}
      </span>
      <div class="stock-position" style="${settings.featureToggles.filterPanel ? `display: none;` : ``}" aria-label="Row Up and Down Arrows">
      <svg class="arrows" viewBox="0 0 33 25" 
