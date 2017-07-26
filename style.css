@@ -181,3 +181,15 @@ ul > li:last-child > div > svg:last-child #DownTriangle
   border-radius: 100%;
   background-color: #41bf15;
 }
+
+/*search route styling*/
+.searchRoute {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+}
+
+.searchRoute input {
+  width: 90%;
+  border-bottom: 1px solid black;
+}

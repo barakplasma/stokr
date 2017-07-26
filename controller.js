@@ -121,7 +121,14 @@ window.Stokr.Controller = (function () {
 
 window.Stokr.Controller.render();
 function test() {
-  console.assert(window.Stokr.Controller.filterStocks({"stockName":"wix","stockGain":"gaining","fromRange":"1","toRange":"80"})[0].Symbol==='WIX',`filter isn't working`);
+  // todo figure out a way to test without this being the onload event
+  window.Stokr.Controller.populateModelWithNewStockData();
+  console.assert(window.Stokr.Controller.filterStocks({
+    "stockName": "wix",
+    "stockGain": "all",
+    "fromRange": "1",
+    "toRange": "80"
+  })[0].Symbol === 'WIX', `filter isn't working`);
   // resetFilterTest
   window.Stokr.Controller.filterStocks({"stockName":"","stockGain":"","fromRange":"","toRange":""});
 }
