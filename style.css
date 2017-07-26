@@ -111,8 +111,8 @@ span {
   height: 2rem;
 }
 
-body > div.container > main > ul > li:first-child > div > svg:first-child #UpTriangle,
-body > div.container > main > ul > li:last-child > div > svg:last-child #DownTriangle
+ul > li:first-child > div > svg:first-child #UpTriangle,
+ul > li:last-child > div > svg:last-child #DownTriangle
 {
   fill: rgba(171, 171, 171, 0.2);
 }
@@ -164,21 +164,10 @@ body > div.container > main > ul > li:last-child > div > svg:last-child #DownTri
   flex-flow: column wrap;
   height: 10vw;
 }
-.filterPanel .formField {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 50%;
-  margin-right: 2rem;
+
+.filterPanel.formField {
+  /*height: 50%;*/
   /*flex: 0 1 auto;*/
-}
-
-.filterPanel .formField input {
-  height: 1rem;
-}
-
-.filterPanel select {
-  width: 40%;
 }
 
 .filterPanel label {
