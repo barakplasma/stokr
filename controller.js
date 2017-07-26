@@ -3,9 +3,20 @@ window.Stokr.Controller = (function () {
 
   // todo breakup filterStocks functions to separate functions here
 
+  function processModel() {
+    return window.Stokr.Model.stockDataFetcher().map(stock=>{
+      stock.PercentChange = calculatePercentChange(stock.LastTradePriceOnly,stock.Change);
+      return stock;
+    });
+  }
+
+  function calculatePercentChange(price,change) {
+    return (change/price*100).toFixed(2);
+  }
+
   return {
     init: function () {
-      window.Stokr.View.displayStockData(window.Stokr.Model.stockDataFetcher(),window.Stokr.Model.stockSettings);
+      window.Stokr.View.displayStockData(processModel(),window.Stokr.Model.stockSettings);
     },
 
     toggleFeatures: function (e) {
@@ -66,7 +77,7 @@ window.Stokr.Controller = (function () {
     filterStocks: function (filterSettings) {
       // console.log('filterSettings: ',filterSettings);
       window.Stokr.Model.stockSettings.filterSettings = filterSettings;
-      let currentStocks = window.Stokr.Model.stockDataFetcher();
+      let currentStocks = processModel();
       // console.log(currentStocks); //beforeFilter
       let filteredStocks = currentStocks.filter(stock=>{
         if(filterSettings.stockName !== ''){
@@ -101,6 +112,7 @@ window.Stokr.Controller = (function () {
       window.Stokr.View.displayStockData(filteredStocks,window.Stokr.Model.stockSettings);
       return filteredStocks;
     },
+
   }
 })();
 
