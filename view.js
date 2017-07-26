@@ -2,8 +2,7 @@ window.Stokr.View = (function () {
   // make sure that the view does now save state
   // todo render filter panel apart from stock data display
   function stockRowsToStockList(stockData, settings) {
-    const html = `<ul class="stockList">${stockRowGenerator(stockData, settings).join('')}</ul>`;
-    return html;
+    return `<ul class="stockList">${stockRowGenerator(stockData, settings).join('')}</ul>`;
   }
 
   function stockRowGenerator(stockData, settings) {
@@ -15,7 +14,7 @@ window.Stokr.View = (function () {
 
 // Added data-id to components in the HTML so we can find it’s related data using the clickHandler
   function createStockRow(stock, settings) {
-    const row = `
+    return `
    <li class="stockRow" data-id="${stock.Symbol}">
      <span class="stock-data stock-name" aria-label="Stock Symbol & Stock Name">
       ${window.Stokr.Controller.concatenateStockSymbolAndName(stock)}
@@ -29,19 +28,18 @@ window.Stokr.View = (function () {
      <div class="stock-position" style="${settings.featureToggles.filterPanel ? `display: none;` : ``}" aria-label="Row Up and Down Arrows">
      <svg class="arrows" viewBox="0 0 33 25" 
      version="1.1" 
-     xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+     xmlns="http://www.w3.org/2000/svg">
       <polygon data-id="upArrow" fill="#8F8F8F" id="UpTriangle" transform="translate(16.500000, 11.000000) scale(-1, 1) translate(-16.500000, -11.000000)" points="16.1891892 3 28 19 5 19">
       </polygon>
      </svg>
      <svg class="arrows" 
-     viewBox="0 0 33 25" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+     viewBox="0 0 33 25" version="1.1" xmlns="http://www.w3.org/2000/svg" >
       <polygon data-id="downArrow" fill="#8F8F8F" id="DownTriangle" transform="translate(16.500000, 11.000000) scale(1, -1) translate(-16.500000, -11.000000) " points="16.1891892 3 28 19 5 19">
       </polygon>
      </svg>
      </div>
    </li>
  `;
-    return row;
   }
 
   // todo put event listeners into view (since they aren't relevant in a CLI for example)
@@ -78,8 +76,8 @@ window.Stokr.View = (function () {
     if (e.target.classList.contains('stock-Change')) {
       // console.log('perCha');
 
-      window.Stokr.Model.stockSettings.changePercentToggle = window.Stokr.Model.stockSettings.changePercentToggle ? false : true;
-      window.Stokr.Controller.init();
+      window.Stokr.Model.stockSettings.changePercentToggle = !window.Stokr.Model.stockSettings.changePercentToggle;
+      window.Stokr.Controller.render();
     }
 
     // console.dir(e.target.dataset);
@@ -108,13 +106,13 @@ window.Stokr.View = (function () {
   function redoClickHandlers() {
     // console.time('redoClickHandlers');
     removeClickHandlersFromDOM();
-    // window.Stokr.Controller.init();
+    // window.Stokr.Controller.render();
     addClickHandlersToDOM();
     // console.timeEnd('redoClickHandlers');
   }
 
   function createFilterPanel() {
-    const nameFilter = `<label for="stockName">By Name</label><input name="stockName" type="text" />`;
+    const nameFilter = `<label for="stockName">By Name</label><input name="stockName"/>`;
     const gainFilter = `<label for="stockGain">By Gain</label><select name="stockGain"><option value="all" selected>all
 </option><option value"gaining
 ">gaining</option><option value="losing">losing</option></select>`;
@@ -124,12 +122,10 @@ step="0.01"/>`;
 step="0.01"/>`;
     const fields = [nameFilter, gainFilter, fromRangeFilter, toRangeFilter];
     const wrappedFields = fields.map(field => {
-      let newField = `<span class="formField">${field}</span>`;
-      return newField;
+      return `<span class="formField">${field}</span>`;
     });
     const applyButton = `<button id="filterApply">Apply</button>`;
-    const filterSection = `<div class="filterPanel">${wrappedFields.join('').concat(applyButton)}</div>`;
-    return filterSection;
+    return `<div class="filterPanel">${wrappedFields.join('').concat(applyButton)}</div>`;
   }
 
   function sendFilterSettings(filterSettings) {

@@ -4,19 +4,19 @@ window.Stokr.Controller = (function () {
   // todo breakup filterStocks functions to separate functions here
 
   return {
-    init: function () {
+    render: function () {
       window.Stokr.View.displayStockData(window.Stokr.Model.stockData,window.Stokr.Model.stockSettings);
     },
 
     toggleFeatures: function (e) {
       if(e === 'Filter') {
         window.Stokr.Model.stockSettings.featureToggles.filterPanel = window.Stokr.Model.stockSettings.featureToggles.filterPanel !== true;
-        this.init();
+        this.render();
       }
       if(e === 'reset'){
         //implement for of loop on properties to false
       }
-      this.init();
+      this.render();
     },
 
     concatenateStockSymbolAndName: function (stock) {
@@ -88,14 +88,14 @@ window.Stokr.Controller = (function () {
         }
       }).filter(stock=>{
         if(filterSettings.fromRange !== ''){
-          return stock.LastTradePriceOnly > filterSettings.fromRange;
+          return parseFloat(stock.LastTradePriceOnly) > parseFloat(filterSettings.fromRange);
         }
         else {
           return true
         }
       }).filter(stock=>{
         if(filterSettings.toRange !== ''){
-          return stock.LastTradePriceOnly < filterSettings.toRange ;
+          return parseFloat(stock.LastTradePriceOnly) < parseFloat(filterSettings.toRange);
         }
         else {
           return true
@@ -108,7 +108,7 @@ window.Stokr.Controller = (function () {
   }
 })();
 
-window.Stokr.Controller.init();
+window.Stokr.Controller.render();
 function test() {
   console.assert(window.Stokr.Controller.filterStocks({"stockName":"wix","stockGain":"gaining","fromRange":"1","toRange":"80"})[0].Symbol==='WIX',`filter isn't working`);
   // resetFilterTest
