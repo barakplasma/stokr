@@ -3,7 +3,17 @@ window.Stokr.Controller = (function () {
 
   // todo breakup filterStocks functions to separate functions here
 
+  const fetchStockAsync = async () =>
+    await (await fetch('http://localhost:7000/quotes?q=MSFT,WIX,AMZN'))
+      .json()
+      .then(res => res.query.results.quote);
+
   return {
+    populateModelWithNewStockData: function () {
+      fetchStockAsync()
+        .then(stocks => window.Stokr.Model.stockData = stocks)
+    },
+
     render: function () {
       window.Stokr.View.displayStockData(window.Stokr.Model.stockData,window.Stokr.Model.stockSettings);
     },
