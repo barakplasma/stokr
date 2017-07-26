@@ -5,16 +5,12 @@ window.Stokr.Controller = (function () {
 
   return {
     init: function () {
-      window.Stokr.View.displayStockData(window.Stokr.Model.stockDataFetcher(),window.Stokr.Model.stockSettings);
+      window.Stokr.View.displayStockData(window.Stokr.Model.stockData,window.Stokr.Model.stockSettings);
     },
 
     toggleFeatures: function (e) {
       if(e === 'Filter') {
-        if(window.Stokr.Model.stockSettings.featureToggles.filterPanel === true){
-          window.Stokr.Model.stockSettings.featureToggles.filterPanel = false;
-        }else{
-          window.Stokr.Model.stockSettings.featureToggles.filterPanel = true;
-        }
+        window.Stokr.Model.stockSettings.featureToggles.filterPanel = window.Stokr.Model.stockSettings.featureToggles.filterPanel !== true;
         this.init();
       }
       if(e === 'reset'){
@@ -29,7 +25,7 @@ window.Stokr.Controller = (function () {
 
     getStockSettings: function () {
       return window.Stokr.Model.stockSettings.changePercentToggle ? 'MarketCapitalization' :
-        'PercentChange';
+        'Change';
     },
 
     stockGainOrLoss: function (stock) {
@@ -41,9 +37,9 @@ window.Stokr.Controller = (function () {
     },
 
     reOrderStocks: function (stockToMove, upOrDownCount) {
-      let currentStocks = window.Stokr.Model.stockDataFetcher();
+      let currentStocks = window.Stokr.Model.stockData;
       //todo reach step, allow a variable upOrDownCount to move x spaces
-      const indexToMove = window.Stokr.Model.stockDataFetcher().findIndex(stock => {
+      const indexToMove = window.Stokr.Model.stockData.findIndex(stock => {
         return stock.Symbol === stockToMove;
       });
       // console.log(indexToMove);
@@ -66,13 +62,15 @@ window.Stokr.Controller = (function () {
     filterStocks: function (filterSettings) {
       // console.log('filterSettings: ',filterSettings);
       window.Stokr.Model.stockSettings.filterSettings = filterSettings;
-      let currentStocks = window.Stokr.Model.stockDataFetcher();
+      let currentStocks = window.Stokr.Model.stockData;
       // console.log(currentStocks); //beforeFilter
       let filteredStocks = currentStocks.filter(stock=>{
         if(filterSettings.stockName !== ''){
           return stock.Name.toUpperCase().includes(filterSettings.stockName.toUpperCase()) || stock.Symbol.toUpperCase().includes(filterSettings.stockName.toUpperCase());
         }
-        else{return true};
+        else {
+          return true
+        }
       }).filter(stock=>{
         if(filterSettings.stockGain !== ''){
           if(filterSettings.stockGain==='gaining'){
@@ -85,17 +83,23 @@ window.Stokr.Controller = (function () {
             return true;
           }
         }
-        else{return true};
+        else {
+          return true
+        }
       }).filter(stock=>{
         if(filterSettings.fromRange !== ''){
           return stock.LastTradePriceOnly > filterSettings.fromRange;
         }
-        else{return true};
+        else {
+          return true
+        }
       }).filter(stock=>{
         if(filterSettings.toRange !== ''){
           return stock.LastTradePriceOnly < filterSettings.toRange ;
         }
-        else{return true};
+        else {
+          return true
+        }
       });
       // console.log(filteredStocks); //afterFilter
       window.Stokr.View.displayStockData(filteredStocks,window.Stokr.Model.stockSettings);
