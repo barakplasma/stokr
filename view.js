@@ -101,6 +101,10 @@ window.Stokr.View = (function () {
       let filterSettings = document.querySelectorAll('input,select');
       sendFilterSettings(filterSettings);
     }
+
+    if (e.target.alt === 'Refresh') {
+      window.Stokr.Controller.populateModelWithNewStockData();
+    }
   }
 
   function redoClickHandlers() {

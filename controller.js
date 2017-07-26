@@ -12,6 +12,7 @@ window.Stokr.Controller = (function () {
     populateModelWithNewStockData: function () {
       fetchStockAsync()
         .then(stocks => window.Stokr.Model.stockData = stocks)
+        .then(this.render)
     },
 
     render: function () {
