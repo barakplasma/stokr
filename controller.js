@@ -40,7 +40,7 @@ window.Stokr.Controller = (function () {
     },
 
     stockGainOrLoss: function (stock) {
-      return parseFloat(stock.PercentChange) > 0 ? 'growing' : 'shrinking';
+      return parseFloat(stock.Change) > 0 ? 'growing' : 'shrinking';
     },
 
     roundPrice: function (price) {
