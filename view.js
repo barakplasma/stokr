@@ -117,6 +117,7 @@ window.Stokr.View = (function () {
     }
   }
 
+  // todo check why the arrow buttons aren't working
   function redoClickHandlers() {
     // console.time('redoClickHandlers');
     removeClickHandlersFromDOM();
@@ -127,6 +128,7 @@ window.Stokr.View = (function () {
 
   // reach todo filterPanel to form from querySelectorAll
   function createFilterPanel(settings) {
+    console.log('createFilterPanel settings ',settings);
     const nameFilter = `<label for="stockName">By Name</label><input name="stockName" type="text" value="${settings.filterSettings.stockName}"/>`;
     const gainFilter = `
       <label for="stockGain">By Gain</label>
