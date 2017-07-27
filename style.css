@@ -187,6 +187,8 @@ ul > li:last-child > div > svg:last-child #DownTriangle
   display: flex;
   flex-flow: row wrap;
   justify-content: center;
+  align-content: center;
+  height:;
 }
 
 .searchRoute input {

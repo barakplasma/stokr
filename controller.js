@@ -84,6 +84,7 @@ window.Stokr.Controller = (function () {
     reOrderStocks: function (stockToMove, upOrDownCount) {
       let currentStocks = window.Stokr.Model.stockData;
       //todo reach step, allow a variable upOrDownCount to move x spaces
+      //consider using http://documentdotwrite.com/moveNode.php
       const indexToMove = window.Stokr.Model.stockData.findIndex(stock => {
         return stock.Symbol === stockToMove;
       });

@@ -201,7 +201,7 @@ step="0.01" value="${restoreFilterSettings(settings, 'toRange')}"/>`;
 
   function normalRoute(stockData, settings) {
     function toFilterOrNot() {
-      if (settings.filterSettings) {
+      if (JSON.stringify(settings.filterSettings) !== '{"stockName":"","stockGain":"all","fromRange":"","toRange":""}') {
         return stockRowsToStockList(window.Stokr.Controller.filterStocks(settings.filterSettings), settings);
       } else {
         return stockRowsToStockList(stockData, settings);
@@ -222,7 +222,7 @@ step="0.01" value="${restoreFilterSettings(settings, 'toRange')}"/>`;
   }
 
   function searchRoute() {
-    document.querySelector('main').innerHTML = `
+    document.querySelector('.container').innerHTML = `
       <div class="searchRoute"><input placeholder="CANCEL"><div><a href="#">Return to Main View</a></div></div>
     `;
   }
