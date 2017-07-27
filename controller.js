@@ -17,6 +17,7 @@ window.Stokr.Controller = (function () {
 
     render: function () {
       window.Stokr.View.displayStockData(window.Stokr.Model.stockData,window.Stokr.Model.stockSettings);
+      test();
     },
 
     toggleFeatures: function (e) {
@@ -119,10 +120,9 @@ window.Stokr.Controller = (function () {
   }
 })();
 
-window.Stokr.Controller.render();
+window.Stokr.Controller.populateModelWithNewStockData();
 function test() {
   // todo figure out a way to test without this being the onload event
-  window.Stokr.Controller.populateModelWithNewStockData();
   console.assert(window.Stokr.Controller.filterStocks({
     "stockName": "wix",
     "stockGain": "all",
@@ -132,4 +132,3 @@ function test() {
   // resetFilterTest
   window.Stokr.Controller.filterStocks({"stockName":"","stockGain":"","fromRange":"","toRange":""});
 }
-test();
