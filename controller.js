@@ -1,14 +1,45 @@
 window.Stokr.Controller = (function () {
   // state is stored in the model, and passed into the view as an arg
-
   // todo breakup filterStocks functions to separate functions here
+
+  function saveStateToLocalStorage() {
+    let stockSettings = JSON.stringify(window.Stokr.Model.stockSettings);
+    localStorage.setItem('stockSettings', stockSettings);
+  }
+
+  function restoreStateFromLocalStorage() {
+    if (localStorage.length > 0) {
+      window.Stokr.Model.stockSettings = JSON.parse(localStorage.getItem('stockSettings'));
+    }
+  }
 
   const fetchStockAsync = async () =>
     await (await fetch('http://localhost:7000/quotes?q=MSFT,WIX,AMZN'))
       .json()
       .then(res => res.query.results.quote);
 
+  function test() {
+    console.assert(window.Stokr.Controller.filterStocks({
+      "stockName": "wix",
+      "stockGain": "all",
+      "fromRange": "1",
+      "toRange": "80"
+    })[0].Symbol === 'WIX', `filter isn't working`);
+    // resetFilterTest
+    window.Stokr.Controller.filterStocks({
+      "stockName": "",
+      "stockGain": "",
+      "fromRange": "",
+      "toRange": ""
+    });
+  }
+
   return {
+    init: function () {
+      restoreStateFromLocalStorage();
+      window.Stokr.Controller.populateModelWithNewStockData();
+    },
+
     populateModelWithNewStockData: function () {
       fetchStockAsync()
         .then(stocks => window.Stokr.Model.stockData = stocks)
@@ -16,13 +47,16 @@ window.Stokr.Controller = (function () {
     },
 
     render: function () {
+
       window.Stokr.View.displayStockData(window.Stokr.Model.stockData,window.Stokr.Model.stockSettings);
+      saveStateToLocalStorage();
       test();
     },
 
     toggleFeatures: function (e) {
       if(e === 'Filter') {
         window.Stokr.Model.stockSettings.featureToggles.filterPanel = window.Stokr.Model.stockSettings.featureToggles.filterPanel !== true;
+
         this.render();
       }
       if(e === 'reset'){
@@ -120,14 +154,4 @@ window.Stokr.Controller = (function () {
   }
 })();
 
-window.Stokr.Controller.populateModelWithNewStockData();
-function test() {
-  console.assert(window.Stokr.Controller.filterStocks({
-    "stockName": "wix",
-    "stockGain": "all",
-    "fromRange": "1",
-    "toRange": "80"
-  })[0].Symbol === 'WIX', `filter isn't working`);
-  // resetFilterTest
-  window.Stokr.Controller.filterStocks({"stockName":"","stockGain":"","fromRange":"","toRange":""});
-}
+window.Stokr.Controller.init();
