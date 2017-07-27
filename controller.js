@@ -38,6 +38,7 @@ window.Stokr.Controller = (function () {
     init: function () {
       restoreStateFromLocalStorage();
       window.Stokr.Controller.populateModelWithNewStockData();
+      // test();
     },
 
     populateModelWithNewStockData: function () {
@@ -47,19 +48,17 @@ window.Stokr.Controller = (function () {
     },
 
     render: function () {
-
-      window.Stokr.View.displayStockData(window.Stokr.Model.stockData,window.Stokr.Model.stockSettings);
+      window.Stokr.View.displayStockData(window.Stokr.Model.stockData, window.Stokr.Model.stockSettings);
       saveStateToLocalStorage();
-      test();
     },
 
     toggleFeatures: function (e) {
-      if(e === 'Filter') {
+      if (e === 'Filter') {
         window.Stokr.Model.stockSettings.featureToggles.filterPanel = window.Stokr.Model.stockSettings.featureToggles.filterPanel !== true;
 
         this.render();
       }
-      if(e === 'reset'){
+      if (e === 'reset') {
         //implement for of loop on properties to false
       }
       this.render();
@@ -91,56 +90,56 @@ window.Stokr.Controller = (function () {
       // console.log(indexToMove);
       // move up
 
-      if(upOrDownCount === -1 && indexToMove !== 0) {
+      if (upOrDownCount === -1 && indexToMove !== 0) {
         const leftover = currentStocks.splice(indexToMove - 1, 1);
         // console.log(leftover);
         currentStocks.splice(indexToMove, 0, leftover[0]);
         // console.log(currentStocks);
       }
       // move down
-      if(upOrDownCount === 1 && indexToMove !== currentStocks.length) {
+      if (upOrDownCount === 1 && indexToMove !== currentStocks.length) {
         const leftover = currentStocks.splice(indexToMove, 1);
-        currentStocks.splice(indexToMove+1, 0, leftover[0]);
+        currentStocks.splice(indexToMove + 1, 0, leftover[0]);
       }
-      window.Stokr.View.displayStockData(currentStocks,window.Stokr.Model.stockSettings);
+      window.Stokr.View.displayStockData(currentStocks, window.Stokr.Model.stockSettings);
     },
 
     filterStocks: function (filterSettings) {
-      // console.log('filterSettings: ',filterSettings);
+      console.log('filterSettings: ', filterSettings);
       window.Stokr.Model.stockSettings.filterSettings = filterSettings;
       let currentStocks = window.Stokr.Model.stockData;
       // console.log(currentStocks); //beforeFilter
-      let filteredStocks = currentStocks.filter(stock=>{
-        if(filterSettings.stockName !== ''){
+      let filteredStocks = currentStocks.filter(stock => {
+        if (filterSettings.stockName !== '') {
           return stock.Name.toUpperCase().includes(filterSettings.stockName.toUpperCase()) || stock.Symbol.toUpperCase().includes(filterSettings.stockName.toUpperCase());
         }
         else {
           return true
         }
-      }).filter(stock=>{
-        if(filterSettings.stockGain !== ''){
-          if(filterSettings.stockGain==='gaining'){
-            return stock.Change>0;
+      }).filter(stock => {
+        if (filterSettings.stockGain !== '') {
+          if (filterSettings.stockGain === 'gaining') {
+            return stock.Change > 0;
           }
-          if(filterSettings.stockGain==='losing'){
-            return stock.Change<0;
+          if (filterSettings.stockGain === 'losing') {
+            return stock.Change < 0;
           }
-          if(filterSettings.stockGain==='all'){
+          if (filterSettings.stockGain === 'all') {
             return true;
           }
         }
         else {
           return true
         }
-      }).filter(stock=>{
-        if(filterSettings.fromRange !== ''){
+      }).filter(stock => {
+        if (filterSettings.fromRange !== '') {
           return parseFloat(stock.LastTradePriceOnly) > parseFloat(filterSettings.fromRange);
         }
         else {
           return true
         }
-      }).filter(stock=>{
-        if(filterSettings.toRange !== ''){
+      }).filter(stock => {
+        if (filterSettings.toRange !== '') {
           return parseFloat(stock.LastTradePriceOnly) < parseFloat(filterSettings.toRange);
         }
         else {
@@ -148,8 +147,15 @@ window.Stokr.Controller = (function () {
         }
       });
       // console.log(filteredStocks); //afterFilter
-      window.Stokr.View.displayStockData(filteredStocks,window.Stokr.Model.stockSettings);
+      // window.Stokr.View.displayStockData(filteredStocks, window.Stokr.Model.stockSettings);
+      saveStateToLocalStorage();
       return filteredStocks;
+    },
+
+    saveFilterSettings: function (newSettings) {
+      console.log(newSettings);
+      window.Stokr.Model.stockSettings.filterSettings = newSettings;
+      saveStateToLocalStorage();
     },
   }
 })();

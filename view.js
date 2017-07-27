@@ -117,19 +117,33 @@ window.Stokr.View = (function () {
     // console.timeEnd('redoClickHandlers');
   }
 
-  function createFilterPanel() {
-    const nameFilter = `<label for="stockName">By Name</label><input name="stockName"/>`;
+  function restoreFilterSettings(settings, property) {
+    if (settings.filterSettings) {
+      if (settings.filterSettings[property]) {
+        return settings.filterSettings[property]
+      } else {
+        return ''
+      }
+    }
+    else {
+      return ''
+    }
+  }
+
+  function createFilterPanel(settings) {
+    const nameFilter = `<label for="stockName">By Name</label><input name="stockName" value="${restoreFilterSettings(settings, 'stockName')}"/>`;
+
     const gainFilter = `
       <label for="stockGain">By Gain</label>
       <select name="stockGain">
-      <option value="all" selected>all</option>
-      <option value="gaining">gaining</option>
-      <option value="losing">losing</option>
+      <option value="all" ${restoreFilterSettings(settings, 'stockGain') === 'all' ? 'selected' : ''}>all</option>
+      <option value="gaining" ${restoreFilterSettings(settings, 'stockGain') === 'gaining' ? 'selected' : ''}>gaining</option>
+      <option value="losing" ${restoreFilterSettings(settings, 'stockGain') === 'losing' ? 'selected' : ''}>losing</option>
       </select>`;
     const fromRangeFilter = `<label for="fromRange">By Price Range: From</label><input name="fromRange" type="number" min="0" 
-step="0.01"/>`;
+step="0.01" value="${restoreFilterSettings(settings, 'fromRange')}"/>`;
     const toRangeFilter = `<label for="toRange">By Price Range: To</label><input name="toRange" type="number" min="0" 
-step="0.01"/>`;
+step="0.01" value="${restoreFilterSettings(settings, 'toRange')}"/>`;
     const fields = [nameFilter, gainFilter, fromRangeFilter, toRangeFilter];
     const wrappedFields = fields.map(field => {
       return `<span class="formField">${field}</span>`;
@@ -144,7 +158,9 @@ step="0.01"/>`;
     filterSettings.forEach(setting => {
       filterSettingsObject[setting.name] = setting.value
     });
-    window.Stokr.Controller.filterStocks(filterSettingsObject);
+    // window.Stokr.Controller.filterStocks(filterSettingsObject);
+    window.Stokr.Controller.saveFilterSettings(filterSettingsObject);
+    window.Stokr.Controller.render();
   }
 
   function hashChangeHandler() {
@@ -183,13 +199,20 @@ step="0.01"/>`;
   }
 
   function normalRoute(stockData, settings) {
+    function toFilterOrNot() {
+      if (settings.filterSettings) {
+        return stockRowsToStockList(window.Stokr.Controller.filterStocks(settings.filterSettings), settings);
+      } else {
+        return stockRowsToStockList(stockData, settings);
+      }
+    }
     document.querySelector('.container').innerHTML = createHeader() + createMain();
-    document.querySelector('.stockList').innerHTML = stockRowsToStockList(stockData, settings);
+    document.querySelector('.stockList').innerHTML = toFilterOrNot();
     let filterPanelLocation = document.querySelector('.filterPanel_Container');
     let filterPanelGenerated = filterPanelLocation.innerHTML !== '';
     // console.log(settings);
     if (settings.featureToggles.filterPanel && !filterPanelGenerated) {
-      filterPanelLocation.innerHTML = createFilterPanel();
+      filterPanelLocation.innerHTML = createFilterPanel(settings);
     }
     if (!settings.featureToggles.filterPanel && filterPanelGenerated) {
       filterPanelLocation.innerHTML = '';
