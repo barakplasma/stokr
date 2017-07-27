@@ -122,7 +122,6 @@ window.Stokr.Controller = (function () {
 
 window.Stokr.Controller.populateModelWithNewStockData();
 function test() {
-  // todo figure out a way to test without this being the onload event
   console.assert(window.Stokr.Controller.filterStocks({
     "stockName": "wix",
     "stockGain": "all",
