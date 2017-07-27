@@ -105,7 +105,7 @@ window.Stokr.Controller = (function () {
     },
 
     filterStocks: function (filterSettings) {
-      console.log('filterSettings: ', filterSettings);
+      // console.log('filterSettings: ', filterSettings);
       window.Stokr.Model.stockSettings.filterSettings = filterSettings;
       let currentStocks = window.Stokr.Model.stockData;
       // console.log(currentStocks); //beforeFilter
@@ -153,7 +153,7 @@ window.Stokr.Controller = (function () {
     },
 
     saveFilterSettings: function (newSettings) {
-      console.log(newSettings);
+      // console.log(newSettings);
       window.Stokr.Model.stockSettings.filterSettings = newSettings;
       saveStateToLocalStorage();
     },

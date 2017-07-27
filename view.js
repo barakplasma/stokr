@@ -97,6 +97,7 @@ window.Stokr.View = (function () {
 
     if (e.target.alt === 'Filter') {
       window.Stokr.Controller.toggleFeatures('Filter');
+      window.Stokr.Controller.render()
     }
 
     if (e.target.id === 'filterApply') {
